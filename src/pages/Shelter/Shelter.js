@@ -55,19 +55,15 @@ class Shelter extends Component {
     } | meowadopt`;
     return (
       <>
-        <div>
-          <p>{this.state.selectedShelter && this.state.selectedShelter.name}</p>
-          <p>
-            {this.state.selectedShelter && this.state.selectedShelter.address}
-          </p>
-          <p>{this.state.selectedShelter && this.state.selectedShelter.city}</p>
-          <p>
-            {this.state.selectedShelter && this.state.selectedShelter.country}
-          </p>
-          <p>
-            {this.state.selectedShelter && this.state.selectedShelter.email}
-          </p>
-        </div>
+        {this.state.selectedShelter && (
+          <div>
+            <p>{this.state.selectedShelter.name}</p>
+            <p>{this.state.selectedShelter.address}</p>
+            <p>{this.state.selectedShelter.city}</p>
+            <p>{this.state.selectedShelter.country}</p>
+            <p>{this.state.selectedShelter.email}</p>
+          </div>
+        )}
         {this.state.shelterCats &&
           this.state.shelterCats.map((item, index) => {
             return (
