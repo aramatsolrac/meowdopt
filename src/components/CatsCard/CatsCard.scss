@@ -1,0 +1,46 @@
+@import "./../../styles/partials/global";
+@import "./../../styles/partials/global";
+
+.cats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__card {
+    display: flex;
+    justify-content: center;
+    padding: 0 1rem;
+    height: 22rem;
+  }
+  &__link {
+    margin: 0;
+  }
+  &__like {
+    position: relative;
+    top: 2.3rem;
+    left: 15.5rem;
+    cursor: pointer;
+  }
+  &__img {
+    border-radius: 0.5rem;
+    height: 20rem;
+    min-width: 18rem;
+    max-width: 18rem;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
+      rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
+      rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    object-fit: cover;
+    object-position: center;
+    cursor: pointer;
+  }
+  &__name {
+    float: left;
+    position: relative;
+    bottom: 2.5rem;
+    left: 1rem;
+    color: $color-light;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 2px $color-secondary;
+    cursor: pointer;
+  }
+}
