@@ -1,10 +1,10 @@
 import "./Cats.scss";
 import { Component } from "react";
-import { Link } from "react-router-dom";
-
 import axios from "axios";
+import CatsCard from "../../components/CatsCard/CatsCard";
+const baseURL = process.env.REACT_APP_API_URL;
+const catsURL = `${baseURL}/cats`;
 
-const apiURL = `http://localhost:8080/cats`;
 class Cats extends Component {
   state = {
     cats: [],
@@ -16,7 +16,7 @@ class Cats extends Component {
 
   fetchCats = () => {
     axios
-      .get(apiURL)
+      .get(catsURL)
       .then((response) => {
         let cats = response.data;
         console.log(cats);
@@ -31,15 +31,14 @@ class Cats extends Component {
   };
   render() {
     document.title = "Home | meowadopt";
-    return this.state.cats.map((item) => {
+    return this.state.cats.map((item, index) => {
       return (
-        <Link key={item.id} to="">
-          <img
-            src={`${process.env.REACT_APP_API_URL}${item.image}`}
-            alt="cat"
-          />
-          <p>{item.catName}</p>
-        </Link>
+        <CatsCard
+          key={index}
+          id={item.id}
+          image={item.image}
+          catName={item.catName}
+        />
       );
     });
   }
