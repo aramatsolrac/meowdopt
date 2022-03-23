@@ -9,11 +9,12 @@ const sheltersURL = `${baseURL}/shelters`;
 class Shelter extends Component {
   state = {
     shelterCats: null,
-    selectedCat: null,
+    selectedShelter: null,
   };
 
   componentDidMount() {
     this.fetchShelterCats();
+    this.fetchSelectedShelter();
   }
 
   fetchShelterCats = () => {
@@ -32,14 +33,40 @@ class Shelter extends Component {
       });
   };
 
+  fetchSelectedShelter = () => {
+    axios
+      .get(`${sheltersURL}/${this.props.match.params.id}`)
+      .then((response) => {
+        let selectedShelter = response.data;
+        console.log({ selectedShelter });
+        this.setState({
+          selectedShelter: selectedShelter,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Error trying to fetch the API.");
+      });
+  };
+
   render() {
     document.title = `${
-      this.state.shelter && this.state.shelterCats[0].shelterName
+      this.state.selectedShelter && this.state.selectedShelter.name
     } | meowadopt`;
     return (
       <>
         <div>
-          <p>{this.state.shelter && this.state.shelterCats[0].shelterName}</p>
+          <p>{this.state.selectedShelter && this.state.selectedShelter.name}</p>
+          <p>
+            {this.state.selectedShelter && this.state.selectedShelter.address}
+          </p>
+          <p>{this.state.selectedShelter && this.state.selectedShelter.city}</p>
+          <p>
+            {this.state.selectedShelter && this.state.selectedShelter.country}
+          </p>
+          <p>
+            {this.state.selectedShelter && this.state.selectedShelter.email}
+          </p>
         </div>
         {this.state.shelterCats &&
           this.state.shelterCats.map((item, index) => {
@@ -49,6 +76,7 @@ class Shelter extends Component {
                 id={item.id}
                 image={item.image}
                 catName={item.catName}
+                urlPath={"/cats"}
               />
             );
           })}
