@@ -3,7 +3,8 @@ import "./App.scss";
 import { Route, Switch } from "react-router-dom";
 import catIcon from "./assets/icons/cat.png";
 import Cats from "./pages/Cats/Cats";
-// import CatsDetails from "./pages/CatsDetails/CatsDetails";
+import CatDetails from "./pages/CatDetails/CatDetails";
+import Shelter from "./pages/Shelter/Shelter";
 
 function App() {
   return (
@@ -14,8 +15,8 @@ function App() {
 
         <Switch>
           <Route path="/" exact component={Cats} />
-          {/* <Route path="/cats/:id" component={CatsDetails} /> */}
-          {/* <Route path="/shelter" component={Shelter} /> */}
+          <Route path="/cats/:id" component={CatDetails} />
+          <Route path="/shelters/:id" component={Shelter} />
         </Switch>
       </div>
     </div>
