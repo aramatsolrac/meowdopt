@@ -38,6 +38,7 @@ class Cats extends Component {
           id={item.id}
           image={item.image}
           catName={item.catName}
+          urlPath={"cats"}
         />
       );
     });
