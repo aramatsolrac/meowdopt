@@ -56,19 +56,19 @@
 
 // inputs
 @mixin input($height) {
-  color: $color-primary-dark;
+  color: black;
   width: 100%;
   height: $height;
   margin: 0.3rem 0 0.9rem 0;
   padding: 1rem;
-  border-radius: 0.25rem;
+  border-radius: 1rem;
   font-weight: 400;
   font-size: 1rem;
-  @include border-all(0.0625rem, solid, $color-secondary-dark);
-  background-color: $color-light-dark;
+  // @include border-all(0.0625rem, solid, $color-secondary);
+  // background-color: $color-secondary;
   @include states;
   &::placeholder {
-    color: $color-primary-dark;
+    color: $color-secondary;
     font-size: 1rem;
     @include desktop {
       font-size: 1rem;
@@ -88,11 +88,11 @@
 // hover, active and focus states
 @mixin states {
   &::placeholder {
-    color: $color-primary-darker;
+    color: $color-secondary;
   }
   &:focus,
   &:active {
-    outline-color: $color-tertiary;
+    outline-color: $color-secondary;
   }
 }
 
