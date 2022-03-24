@@ -1,5 +1,4 @@
 @import "./../../styles/partials/global";
-@import "./../../styles/partials/global";
 
 .cats {
   display: flex;
@@ -14,12 +13,7 @@
   &__link {
     margin: 0;
   }
-  &__like {
-    position: relative;
-    top: 2.3rem;
-    left: 15.5rem;
-    cursor: pointer;
-  }
+
   &__img {
     border-radius: 0.5rem;
     height: 20rem;
