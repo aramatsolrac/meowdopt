@@ -2,6 +2,7 @@ import "./Shelter.scss";
 import axios from "axios";
 import { Component } from "react";
 import CatsCard from "./../../components/CatsCard/CatsCard";
+import { ArrowBackIcon } from "@chakra-ui/icons";
 
 const baseURL = process.env.REACT_APP_API_URL;
 const sheltersURL = `${baseURL}/shelters`;
@@ -49,12 +50,17 @@ class Shelter extends Component {
       });
   };
 
+  handleBack = () => {
+    this.props.history.goBack();
+  };
+
   render() {
     document.title = `${
       this.state.selectedShelter && this.state.selectedShelter.name
     } | meowadopt`;
     return (
       <>
+        <ArrowBackIcon onClick={this.handleBack} w={30} h={30} />
         {this.state.selectedShelter && (
           <div>
             <p>{this.state.selectedShelter.name}</p>
