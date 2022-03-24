@@ -54,7 +54,7 @@ class CatDetails extends Component {
     MySwal.fire({
       title: (
         <p>
-          Do you want to adopt{" "}
+          Do you want to send an adoption request to{" "}
           <span className="test">{this.state.selectedCat.catName}</span>?
         </p>
       ),
