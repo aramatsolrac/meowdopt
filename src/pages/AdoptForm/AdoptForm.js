@@ -1,1 +1,0 @@
-import "./AdoptForm.scss";
