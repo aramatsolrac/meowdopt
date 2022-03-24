@@ -1,1 +1,34 @@
 @import "./../../styles/partials/global";
+
+.test {
+  color: $color-secondary;
+}
+
+.test2 {
+  display: flex;
+  flex-direction: row;
+  width: 3rem;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.test2 p {
+  padding-top: 0.2rem;
+}
+
+.test3 {
+  font-size: 1.5rem;
+}
+
+img {
+  border-radius: 0.5rem;
+}
+.like {
+  cursor: pointer;
+  color: grey;
+}
+
+.liked {
+  color: red;
+  cursor: pointer;
+}
