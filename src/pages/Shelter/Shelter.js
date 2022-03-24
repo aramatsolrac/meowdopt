@@ -66,7 +66,6 @@ class Shelter extends Component {
             <p>{this.state.selectedShelter.name}</p>
             <p>{this.state.selectedShelter.address}</p>
             <p>{this.state.selectedShelter.city}</p>
-            <p>{this.state.selectedShelter.country}</p>
             <p>{this.state.selectedShelter.email}</p>
           </div>
         )}
