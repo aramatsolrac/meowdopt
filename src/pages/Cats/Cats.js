@@ -35,7 +35,7 @@ class Cats extends Component {
       });
   };
 
-  //function to search a specific video
+  // function to search cats
   searchCats = (event) => {
     const searchInput = event.target.value.toLowerCase();
     console.log({ searchInput });
