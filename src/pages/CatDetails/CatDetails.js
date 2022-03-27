@@ -9,6 +9,7 @@ import CatsCard from "../../components/CatsCard/CatsCard";
 import Button from "../../components/Button/Button";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { isLoggedIn, getLoggedUser } from "../../helpers/authHelper";
 
 const baseURL = process.env.REACT_APP_API_URL;
 const catsURL = `${baseURL}/cats`;
@@ -43,12 +44,18 @@ class CatDetails extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+
+    if (!isLoggedIn()) {
+      this.props.history.push("/login");
+      return;
+    }
+
     const MySwal = withReactContent(Swal);
     const data = {
       catID: this.state.selectedCat.id,
-      userID: "11",
-      name: "Test0",
-      email: "-",
+      userID: getLoggedUser().id,
+      name: getLoggedUser().name,
+      email: getLoggedUser().email,
       status: "Received",
     };
     MySwal.fire({
@@ -118,6 +125,12 @@ class CatDetails extends Component {
       catID: this.state.selectedCat.id,
       userID: "11",
     };
+
+    if (!isLoggedIn()) {
+      this.props.history.push("/login");
+      return;
+    }
+
     if (this.state.isLiked === false) {
       axios
         .post(`${catsURL}/${this.state.selectedCat.id}/like`, data)
