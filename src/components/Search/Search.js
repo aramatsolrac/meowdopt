@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import DropdownFilter from "../DropDownFilter/DropDownFilter";
 
-const Search = ({ searchCats, filterCats }) => {
+const Search = ({ searchCats, filterCats, handleClear }) => {
   return (
     <div className="search">
       <label htmlFor="search">
@@ -16,7 +16,7 @@ const Search = ({ searchCats, filterCats }) => {
         placeholder="Search"
         onChange={searchCats}
       ></input>
-      <DropdownFilter filterCats={filterCats} />
+      <DropdownFilter filterCats={filterCats} handleClear={handleClear} />
     </div>
   );
 };
