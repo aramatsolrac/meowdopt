@@ -6,6 +6,7 @@ import CatDetails from "./pages/CatDetails/CatDetails";
 import Shelter from "./pages/Shelter/Shelter";
 import Header from "./components/Header/Header";
 import Login from "./pages/Login/Login";
+import SignUp from "./pages/SignUp/SignUp";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/cats/:id" component={CatDetails} />
           <Route path="/shelters/:id" component={Shelter} />
           <Route path="/login" component={Login} />
+          <Route path="/signup" component={SignUp} />
         </Switch>
       </div>
     </div>
