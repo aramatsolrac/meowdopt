@@ -45,7 +45,8 @@ class Cats extends Component {
         cat.shelterName.toLowerCase().includes(searchInput) ||
         cat.age.toLowerCase().includes(searchInput) ||
         cat.gender.toLowerCase().includes(searchInput) ||
-        cat.description.toLowerCase().includes(searchInput)
+        cat.description.toLowerCase().includes(searchInput) ||
+        cat.city.toLowerCase().includes(searchInput)
       );
     });
     this.setState({
@@ -54,7 +55,7 @@ class Cats extends Component {
     });
   };
 
-  // // function to filter cats
+  // function to filter cats
   filterCats = (event) => {
     event.preventDefault();
 
@@ -65,7 +66,6 @@ class Cats extends Component {
     const adult = event.target.adult.checked;
     const senior = event.target.senior.checked;
     const city = event.target.city.value;
-    console.log({ city });
 
     let filteredCats = this.state.cats;
     let selectedAges = [];
@@ -91,13 +91,20 @@ class Cats extends Component {
       );
     }
 
-    //  TODO: filter cities
+    filteredCats = filteredCats.filter((cat) => {
+      return cat.city.toLowerCase().includes(city.toLowerCase());
+    });
 
     this.setState({
       searchedCats: filteredCats,
     });
+  };
 
-    console.log({ filteredCats });
+  // function to clear filter
+  handleClear = (event) => {
+    this.fetchCats();
+    let form = event.target.parentNode.parentNode;
+    form.reset();
   };
 
   render() {
@@ -106,7 +113,11 @@ class Cats extends Component {
 
     return (
       <>
-        <Search searchCats={this.searchCats} filterCats={this.filterCats} />
+        <Search
+          searchCats={this.searchCats}
+          filterCats={this.filterCats}
+          handleClear={this.handleClear}
+        />
         {this.state.searchedCats.map((item, index) => {
           return (
             <CatsCard
