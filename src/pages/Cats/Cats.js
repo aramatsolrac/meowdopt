@@ -1,5 +1,4 @@
 import "./Cats.scss";
-import "react-slideshow-image/dist/styles.css";
 import { Component } from "react";
 import axios from "axios";
 import CatsCard from "../../components/CatsCard/CatsCard";
@@ -28,7 +27,7 @@ class Cats extends Component {
         console.log(cats);
         this.setState({
           cats: cats,
-          filteredCats: cats,
+          searchedCats: cats,
         });
       })
       .catch((error) => {
@@ -40,6 +39,7 @@ class Cats extends Component {
   // function to search cats
   searchCats = (event) => {
     const searchInput = event.target.value.toLowerCase();
+    console.log({ searchInput });
     const searchedCats = this.state.cats.filter((cat) => {
       return (
         cat.catName.toLowerCase().includes(searchInput) ||
@@ -58,42 +58,69 @@ class Cats extends Component {
   // // function to filter cats
   filterCats = (event) => {
     event.preventDefault();
-    console.log(event.target.male.value);
-    console.log(event.target.female.value);
+    // console.log(event.target.male.value);
+    // console.log(event.target.female.value);
     // console.log(event.target.kitty.value);
-    // console.log(event.target.young.value);
+    console.log(event.target.young.checked);
     // console.log(event.target.adult.value);
     // console.log(event.target.senior.value);
     // console.log(event.target.city.value);
 
-    // const male = event.target.male.value;
-    // const female = event.target.female.value;
-    // const kitty = event.target.kitty.value;
-    // const young = event.target.young.value;
-    // const adult = event.target.adult.value;
-    // const senior = event.target.senior.value;
-    // const city = event.target.city.value;
+    const male = event.target.male.checked;
+    const female = event.target.female.checked;
+    const kitty = event.target.kitty.checked;
+    const young = event.target.young.checked;
+    const adult = event.target.adult.checked;
+    const senior = event.target.senior.checked;
+    const city = event.target.city.value;
 
-    const filteredCats = this.state.cats.filter((cat) => {
-      console.log(
-        "Filtered cats",
-        cat.gender.toLowerCase().includes(event.target.male.value)
+    let filteredCats = this.state.cats;
+
+    if (kitty) {
+      filteredCats = filteredCats.filter((cat) =>
+        cat.age.toLowerCase().includes("kitty")
       );
-      return cat.city.toLowerCase().includes(event.target.city.value);
-    });
+      this.setState({
+        filteredCats: filteredCats,
+      });
+    }
+
+    if (young) {
+      filteredCats = filteredCats.filter((cat) =>
+        cat.age.toLowerCase().includes("young")
+      );
+      this.setState({
+        filteredCats: filteredCats,
+      });
+    }
+
+    if (adult) {
+      filteredCats = filteredCats.filter((cat) =>
+        cat.age.toLowerCase().includes("adult")
+      );
+      this.setState({
+        filteredCats: filteredCats,
+      });
+    }
+
+    if (senior) {
+      filteredCats = filteredCats.filter((cat) =>
+        cat.age.toLowerCase().includes("senior")
+      );
+      this.setState({
+        filteredCats: filteredCats,
+      });
+    }
+
     console.log({ filteredCats });
-    this.setState({
-      filteredCats: filteredCats,
-      filterInput: event.target.city.value,
-    });
   };
 
   render() {
     document.title = "Home | meowadopt";
     return (
       <>
-        <Search searchCats={this.searchCats} filterCats={this.filterCats} />
-        {this.state.filteredCats.map((item, index) => {
+        <Search searchCats={this.searchCats} />
+        {this.state.searchedCats.map((item, index) => {
           return (
             <CatsCard
               key={index}

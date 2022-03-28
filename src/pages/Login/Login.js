@@ -2,24 +2,28 @@ import "./Login";
 import "./Login.scss";
 import { Component } from "react";
 import { login } from "../../helpers/authHelper";
+// import formValidation from "../../helpers/formValidation";
 
 class Login extends Component {
-  //   state = {};
-
-  //   componentDidMount() {}
-
-  handleBack = () => {
-    this.props.history.goBack();
+  state = {
+    show: false,
   };
 
+  handleHome = () => {
+    this.props.history.push("/");
+  };
+
+  //TODO: add validation
   handleSubmit = (event) => {
     event.preventDefault();
     login(
-      event.target.userName.value,
+      event.target.username.value,
       event.target.password.value,
-      this.handleBack
+      this.handleHome
     );
   };
+
+  handleClick = () => this.setState({ show: !this.state.show });
 
   render() {
     return (
@@ -27,11 +31,24 @@ class Login extends Component {
         <form onSubmit={this.handleSubmit}>
           <div>
             <label>Username </label>
-            <input type="text" name="userName" required />
+            <input
+              placeholder="Enter your username"
+              type="text"
+              name="username"
+              className="test"
+            />
           </div>
           <div>
             <label>Password </label>
-            <input type="password" name="password" required />
+            <input
+              name="password"
+              className="test"
+              type={this.state.show ? "text" : "password"}
+            />
+            <button type="button" onClick={this.handleClick}>
+              {" "}
+              {this.state.show ? "Hide" : "Show"}
+            </button>
           </div>
           <div>
             <input type="submit" />
