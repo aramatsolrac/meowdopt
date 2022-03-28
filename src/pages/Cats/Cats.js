@@ -9,7 +9,7 @@ const catsURL = `${baseURL}/cats`;
 class Cats extends Component {
   state = {
     cats: [],
-    filteredCats: [],
+    searchedCats: [],
     searchInput: "",
   };
 
@@ -25,7 +25,7 @@ class Cats extends Component {
         console.log(cats);
         this.setState({
           cats: cats,
-          filteredCats: cats,
+          searchedCats: cats,
         });
       })
       .catch((error) => {
@@ -38,7 +38,7 @@ class Cats extends Component {
   searchCats = (event) => {
     const searchInput = event.target.value.toLowerCase();
     console.log({ searchInput });
-    const filteredCats = this.state.cats.filter((cat) => {
+    const searchedCats = this.state.cats.filter((cat) => {
       return (
         cat.catName.toLowerCase().includes(searchInput) ||
         cat.shelterName.toLowerCase().includes(searchInput) ||
@@ -48,11 +48,6 @@ class Cats extends Component {
       );
     });
     this.setState({
-<<<<<<< Updated upstream
-      filteredCats: filteredCats,
-      searchInput: searchInput,
-    });
-=======
       searchedCats: searchedCats,
       searchInput: searchInput,
     });
@@ -116,7 +111,6 @@ class Cats extends Component {
     }
 
     console.log({ filteredCats });
->>>>>>> Stashed changes
   };
 
   render() {
@@ -124,7 +118,7 @@ class Cats extends Component {
     return (
       <>
         <Search searchCats={this.searchCats} />
-        {this.state.filteredCats.map((item, index) => {
+        {this.state.searchedCats.map((item, index) => {
           return (
             <CatsCard
               key={index}
