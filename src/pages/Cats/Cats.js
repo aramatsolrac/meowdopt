@@ -1,5 +1,4 @@
 import "./Cats.scss";
-import "react-slideshow-image/dist/styles.css";
 import { Component } from "react";
 import axios from "axios";
 import CatsCard from "../../components/CatsCard/CatsCard";
@@ -49,9 +48,75 @@ class Cats extends Component {
       );
     });
     this.setState({
+<<<<<<< Updated upstream
       filteredCats: filteredCats,
       searchInput: searchInput,
     });
+=======
+      searchedCats: searchedCats,
+      searchInput: searchInput,
+    });
+  };
+
+  // // function to filter cats
+  filterCats = (event) => {
+    event.preventDefault();
+    // console.log(event.target.male.value);
+    // console.log(event.target.female.value);
+    // console.log(event.target.kitty.value);
+    console.log(event.target.young.checked);
+    // console.log(event.target.adult.value);
+    // console.log(event.target.senior.value);
+    // console.log(event.target.city.value);
+
+    const male = event.target.male.checked;
+    const female = event.target.female.checked;
+    const kitty = event.target.kitty.checked;
+    const young = event.target.young.checked;
+    const adult = event.target.adult.checked;
+    const senior = event.target.senior.checked;
+    const city = event.target.city.value;
+
+    let filteredCats = this.state.cats;
+
+    if (kitty) {
+      filteredCats = filteredCats.filter((cat) =>
+        cat.age.toLowerCase().includes("kitty")
+      );
+      this.setState({
+        filteredCats: filteredCats,
+      });
+    }
+
+    if (young) {
+      filteredCats = filteredCats.filter((cat) =>
+        cat.age.toLowerCase().includes("young")
+      );
+      this.setState({
+        filteredCats: filteredCats,
+      });
+    }
+
+    if (adult) {
+      filteredCats = filteredCats.filter((cat) =>
+        cat.age.toLowerCase().includes("adult")
+      );
+      this.setState({
+        filteredCats: filteredCats,
+      });
+    }
+
+    if (senior) {
+      filteredCats = filteredCats.filter((cat) =>
+        cat.age.toLowerCase().includes("senior")
+      );
+      this.setState({
+        filteredCats: filteredCats,
+      });
+    }
+
+    console.log({ filteredCats });
+>>>>>>> Stashed changes
   };
 
   render() {
