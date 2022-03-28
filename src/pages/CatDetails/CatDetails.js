@@ -167,6 +167,7 @@ class CatDetails extends Component {
     } | meowadopt`;
 
     const likeClass = this.state.isLiked === true ? "liked" : "";
+    console.log("CatDetails");
 
     return (
       <>
