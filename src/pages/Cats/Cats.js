@@ -37,7 +37,6 @@ class Cats extends Component {
   // function to search cats
   searchCats = (event) => {
     const searchInput = event.target.value.toLowerCase();
-    console.log({ searchInput });
     const searchedCats = this.state.cats.filter((cat) => {
       return (
         cat.catName.toLowerCase().includes(searchInput) ||
@@ -56,13 +55,6 @@ class Cats extends Component {
   // // function to filter cats
   filterCats = (event) => {
     event.preventDefault();
-    // console.log(event.target.male.value);
-    // console.log(event.target.female.value);
-    // console.log(event.target.kitty.value);
-    console.log(event.target.young.checked);
-    // console.log(event.target.adult.value);
-    // console.log(event.target.senior.value);
-    // console.log(event.target.city.value);
 
     const male = event.target.male.checked;
     const female = event.target.female.checked;
@@ -71,53 +63,48 @@ class Cats extends Component {
     const adult = event.target.adult.checked;
     const senior = event.target.senior.checked;
     const city = event.target.city.value;
+    console.log({ city });
 
     let filteredCats = this.state.cats;
+    let selectedAges = [];
+    let selectedGender = [];
 
-    if (kitty) {
+    male && selectedGender.push("male");
+    female && selectedGender.push("female");
+
+    if (selectedGender.length > 0) {
       filteredCats = filteredCats.filter((cat) =>
-        cat.age.toLowerCase().includes("kitty")
+        selectedGender.includes(cat.gender.toLowerCase())
       );
-      this.setState({
-        filteredCats: filteredCats,
-      });
     }
 
-    if (young) {
+    kitty && selectedAges.push("kitty");
+    young && selectedAges.push("young");
+    adult && selectedAges.push("adult");
+    senior && selectedAges.push("senior");
+
+    if (selectedAges.length > 0) {
       filteredCats = filteredCats.filter((cat) =>
-        cat.age.toLowerCase().includes("young")
+        selectedAges.includes(cat.age.toLowerCase())
       );
-      this.setState({
-        filteredCats: filteredCats,
-      });
     }
 
-    if (adult) {
-      filteredCats = filteredCats.filter((cat) =>
-        cat.age.toLowerCase().includes("adult")
-      );
-      this.setState({
-        filteredCats: filteredCats,
-      });
-    }
+    //  TODO: filter cities
 
-    if (senior) {
-      filteredCats = filteredCats.filter((cat) =>
-        cat.age.toLowerCase().includes("senior")
-      );
-      this.setState({
-        filteredCats: filteredCats,
-      });
-    }
+    this.setState({
+      searchedCats: filteredCats,
+    });
 
     console.log({ filteredCats });
   };
 
   render() {
     document.title = "Home | meowadopt";
+    console.log("Cats");
+
     return (
       <>
-        <Search searchCats={this.searchCats} />
+        <Search searchCats={this.searchCats} filterCats={this.filterCats} />
         {this.state.searchedCats.map((item, index) => {
           return (
             <CatsCard
