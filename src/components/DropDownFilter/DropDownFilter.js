@@ -16,71 +16,89 @@ class DropdownFilter extends Component {
     }));
   };
 
-  // // function to filter cats
-  // filterCats = (event) => {
-  //   const filterInputs = event.target.value.toLowerCase();
-  //   console.log({ filterInputs });
-  //   const filteredCats = this.state.cats.filter((cat) => {
-  //     return (
-  //       cat.gender.toLowerCase().includes(filterInputs) &&
-  //       cat.age.toLowerCase().includes(filterInputs) &&
-  //       cat.city.toLowerCase().includes(filterInputs)
-  //     );
-  //   });
-  //   this.setState({
-  //     filteredCats: filteredCats,
-  //     filterInputs: filterInputs,
-  //   });
-  // };
-
   renderDropdownFilter = () => {
     return (
-      <div className="dropdown__body">
-        <div className="dropdown__gender">
-          <h3>Gender</h3>
-          <label htmlFor="male">Male</label>
-          <input type="checkbox" value="Male" id="male" placeholder="Male" />
-          <label htmlFor="female">Female</label>
-          <input type="checkbox" value="Male" id="male" placeholder="Male" />
+      <form onSubmit={this.props.filterCats}>
+        <div className="dropdown__body">
+          <div>
+            <label htmlFor="gender">
+              Gender
+              <div>
+                <label htmlFor="male">
+                  Male
+                  <input type="checkbox" value="male" name="male" />
+                </label>
+                <label htmlFor="female">
+                  Female
+                  <input type="checkbox" value="female" name="female" />
+                </label>
+              </div>
+            </label>
+          </div>
+          <div>
+            <label htmlFor="age">
+              Age
+              <div>
+                <label htmlFor="kitty">
+                  Kitty
+                  <input type="checkbox" value="kitty" name="kitty" />
+                </label>
+                <label htmlFor="young">
+                  Young
+                  <input type="checkbox" value="young" name="young" />
+                </label>{" "}
+                <label htmlFor="adult">
+                  Adult
+                  <input type="checkbox" value="adult" name="adult" />
+                </label>
+                <label htmlFor="senior">
+                  Senior
+                  <input type="checkbox" value="senior" name="senior" />
+                </label>
+              </div>
+            </label>
+          </div>
+          <div className="dropdown__city">
+            <label htmlFor="city">City</label>
+            <select name="city" id="city">
+              <option hidden value="">
+                {""}
+              </option>
+              <option value="airdrie" name="airdrie">
+                Airdrie
+              </option>
+              <option value="calgary" name="calgary">
+                Calgary
+              </option>
+              <option value="edmonton" name="edmonton">
+                Edmonton
+              </option>
+              <option value="Grande Prairie" name="Grande Prairie">
+                Grande Prairie
+              </option>
+              <option value="Red Deer" name="Red Deer">
+                Red Deer
+              </option>
+              <option value="leduc" name="leduc">
+                Leduc
+              </option>
+              <option value="lethbridge" name="lethbridge">
+                Lethbridge
+              </option>
+              <option value="Medicine Hat" name="Medicine Hat">
+                Medicine Hat
+              </option>
+              <option value="Saint Albert" name="Saint Albert">
+                Saint Albert
+              </option>
+              <option value="Spruce Grove" name="Spruce Grove">
+                Spruce Grove
+              </option>
+            </select>
+          </div>
+          <Button children={"View Matches"} />
         </div>
-        <div className="dropdown__age">
-          <h3>Age</h3>
-          <label htmlFor="kitty">Kitty</label>
-          <input type="checkbox" value="kitty" id="kitty" placeholder="Kitty" />
-          <label htmlFor="young">Female</label>
-          <input type="checkbox" value="Male" id="male" placeholder="Male" />
-          <label htmlFor="female">Young</label>
-          <input type="checkbox" value="young" id="young" placeholder="young" />
-          <label htmlFor="adult">Adult</label>
-          <input type="checkbox" value="adult" id="adult" placeholder="adult" />
-          <label htmlFor="senior">Senior</label>
-          <input
-            type="checkbox"
-            value="senior"
-            id="senior"
-            placeholder="senior"
-          />
-        </div>
-        <div className="dropdown__city">
-          <label htmlFor="city">City</label>
-          <select name="city" id="city">
-            <option hidden value="">
-              {""}
-            </option>
-            <option value="airdrie">Airdrie</option>
-            <option value="calgary">Calgary</option>
-            <option value="edmonton">Edmonton</option>
-            <option value="grandePrairie">Grande Prairie</option>
-            <option value="redDeer">Red Deer</option>
-            <option value="leduc">Leduc</option>
-            <option value="lethbridge">Lethbridge</option>
-            <option value="medicineHat">Medicine Hat</option>
-            <option value="saintAlbert">Saint Albert</option>
-            <option value="spruceGrove">Spruce Grove</option>
-          </select>
-        </div>
-        <Button children={"View Matches"} filterCats={this.props.filterCats} />
-      </div>
+      </form>
     );
   };
 
