@@ -55,6 +55,8 @@ class Shelter extends Component {
   };
 
   render() {
+    console.log("Shelter");
+
     document.title = `${
       this.state.selectedShelter && this.state.selectedShelter.name
     } | meowadopt`;

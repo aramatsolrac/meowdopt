@@ -80,7 +80,7 @@ class SignUp extends Component {
           MySwal.fire({
             position: "center",
             icon: "success",
-            title: "Your login has been submitted",
+            title: "Your login has been created",
             showConfirmButton: false,
             timer: 2000,
           });
@@ -106,6 +106,8 @@ class SignUp extends Component {
     }
   };
   render() {
+    console.log("SignUp");
+
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -139,7 +141,7 @@ class SignUp extends Component {
           <div>
             <label>Password </label>
             <input
-              type="password"
+              type="text"
               name="password"
               className="test"
               onChange={this.handleChangePassword}

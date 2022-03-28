@@ -2,7 +2,6 @@ import "./Login";
 import "./Login.scss";
 import { Component } from "react";
 import { login } from "../../helpers/authHelper";
-// import formValidation from "../../helpers/formValidation";
 
 class Login extends Component {
   state = {
@@ -26,6 +25,8 @@ class Login extends Component {
   handleClick = () => this.setState({ show: !this.state.show });
 
   render() {
+    console.log("Login");
+
     return (
       <div>
         <form onSubmit={this.handleSubmit}>

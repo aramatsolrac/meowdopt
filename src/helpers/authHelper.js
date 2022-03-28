@@ -1,10 +1,13 @@
 import axios from "axios";
-
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 const baseURL = process.env.REACT_APP_API_URL;
 const loginURL = `${baseURL}/login`;
 
 // check if the user data match with the backend
 export function login(userName, password, onSuccess) {
+  const MySwal = withReactContent(Swal);
+
   const data = {
     username: userName,
     password: password,
@@ -18,10 +21,23 @@ export function login(userName, password, onSuccess) {
       console.log(response.data);
       sessionStorage.setItem("userLoggedIn", response.data.user);
       onSuccess();
+      MySwal.fire({
+        position: "center",
+        icon: "success",
+        title: "You are successfully logged in",
+        showConfirmButton: false,
+        timer: 2000,
+      });
     })
     .catch((error) => {
       //console.log(error.response);
-      alert("Username or password invalid");
+      MySwal.fire({
+        position: "center",
+        icon: "error",
+        title: "Username or Password invalid!",
+        showConfirmButton: false,
+        timer: 3000,
+      });
     });
 }
 
