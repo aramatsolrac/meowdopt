@@ -121,15 +121,15 @@ class CatDetails extends Component {
   };
 
   handleLike = () => {
-    const data = {
-      catID: this.state.selectedCat.id,
-      userID: "11",
-    };
-
     if (!isLoggedIn()) {
       this.props.history.push("/login");
       return;
     }
+
+    const data = {
+      catID: this.state.selectedCat.id,
+      userID: getLoggedUser().id,
+    };
 
     if (this.state.isLiked === false) {
       axios
