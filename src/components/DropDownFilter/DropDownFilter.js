@@ -96,6 +96,7 @@ class DropdownFilter extends Component {
             </select>
           </div>
           <Button children={"View Matches"} />
+          <Button children={"Clear"} onClick={this.props.handleClear} />
         </div>
       </form>
     );
