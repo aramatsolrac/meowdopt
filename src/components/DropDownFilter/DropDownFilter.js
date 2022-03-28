@@ -7,7 +7,6 @@ import Button from "./../Button/Button";
 class DropdownFilter extends Component {
   state = {
     dropdownVisible: false,
-    // filterInputs: "",
   };
 
   toggleDropdown = (e) => {
@@ -85,6 +84,7 @@ class DropdownFilter extends Component {
   };
 
   render() {
+    console.log("DropMenu");
     return (
       <div className="dropdown__container">
         <div className="dropdown__trigger">
