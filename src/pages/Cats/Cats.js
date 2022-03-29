@@ -91,9 +91,12 @@ class Cats extends Component {
       );
     }
 
-    filteredCats = filteredCats.filter((cat) => {
-      return cat.city.toLowerCase().includes(city.toLowerCase());
-    });
+    console.log({ city });
+    if (city !== "City" && city !== "") {
+      filteredCats = filteredCats.filter((cat) => {
+        return cat.city.toLowerCase().includes(city.toLowerCase());
+      });
+    }
 
     this.setState({
       searchedCats: filteredCats,
@@ -103,7 +106,7 @@ class Cats extends Component {
   // function to clear filter
   handleClear = (event) => {
     this.fetchCats();
-    let form = event.target.parentNode.parentNode;
+    const form = event.target.parentNode.parentNode.parentNode;
     form.reset();
   };
 
