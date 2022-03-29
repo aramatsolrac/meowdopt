@@ -3,6 +3,7 @@ import "./DropDownFilter.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import Button from "./../Button/Button";
+// import SelectCity from "../SelectCity/SelectCity";
 
 class DropdownFilter extends Component {
   state = {
