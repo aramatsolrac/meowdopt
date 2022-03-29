@@ -35,6 +35,12 @@ class CatDetails extends Component {
         this.setState({
           selectedCat: selectedCat,
         });
+        // TODO: fetch likes from user
+        // TODO: check if this car was liked
+        // TODO: set state
+        // this.setState({
+        //   isLiked: false,
+        // });
       })
       .catch((error) => {
         console.log(error);
@@ -166,8 +172,8 @@ class CatDetails extends Component {
       this.state.selectedCat && this.state.selectedCat.catName
     } | meowadopt`;
 
-    const likeClass = this.state.isLiked === true ? "liked" : "";
-    console.log("CatDetails");
+    // const likeClass = this.state.isLiked === true ? "liked" : "";
+    // console.log("CatDetails");
 
     return (
       <>
@@ -202,7 +208,7 @@ class CatDetails extends Component {
                 <FontAwesomeIcon
                   icon={faHeart}
                   onClick={this.handleLike}
-                  className={`like ${likeClass}`}
+                  className={`${!this.state.isLiked ? `like` : `liked`}`}
                   size="lg"
                 />
               </div>
