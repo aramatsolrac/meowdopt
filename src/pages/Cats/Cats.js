@@ -66,6 +66,7 @@ class Cats extends Component {
     const adult = event.target.adult.checked;
     const senior = event.target.senior.checked;
     const city = event.target.city.value;
+    console.log(event.target.inputValue);
 
     let filteredCats = this.state.cats;
     let selectedAges = [];
@@ -92,7 +93,7 @@ class Cats extends Component {
     }
 
     console.log({ city });
-    if (city !== "City" && city !== "") {
+    if (city !== "Select a City" && city !== "") {
       filteredCats = filteredCats.filter((cat) => {
         return cat.city.toLowerCase().includes(city.toLowerCase());
       });
