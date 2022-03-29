@@ -20,48 +20,62 @@ class DropdownFilter extends Component {
       <form onSubmit={this.props.filterCats}>
         <div className="dropdown__body">
           <div>
-            <label htmlFor="gender">
+            <label htmlFor="gender" className="dropdown__label">
               Gender
               <div>
-                <label htmlFor="male">
-                  Male
-                  <input type="checkbox" value="male" name="male" />
-                </label>
-                <label htmlFor="female">
-                  Female
-                  <input type="checkbox" value="female" name="female" />
-                </label>
+                <div>
+                  <div className="dropdown__input">
+                    <label>
+                      <input type="checkbox" value="male" name="male" />
+                      <span>Male</span>
+                    </label>
+                  </div>
+                </div>
+                <div className="dropdown__input">
+                  <label>
+                    <input type="checkbox" value="female" name="female" />
+                    <span>Female</span>
+                  </label>
+                </div>
               </div>
             </label>
           </div>
           <div>
-            <label htmlFor="age">
+            <label htmlFor="age" className="dropdown__label">
               Age
               <div>
-                <label htmlFor="kitty">
-                  Kitty
-                  <input type="checkbox" value="kitty" name="kitty" />
-                </label>
-                <label htmlFor="young">
-                  Young
-                  <input type="checkbox" value="young" name="young" />
-                </label>{" "}
-                <label htmlFor="adult">
-                  Adult
-                  <input type="checkbox" value="adult" name="adult" />
-                </label>
-                <label htmlFor="senior">
-                  Senior
-                  <input type="checkbox" value="senior" name="senior" />
-                </label>
+                <div className="dropdown__input">
+                  <label>
+                    <input type="checkbox" value="kitty" name="kitty" />
+                    <span>Kitty</span>
+                  </label>
+                </div>
+                <div className="dropdown__input">
+                  <label>
+                    <input type="checkbox" value="young" name="young" />
+                    <span>Young</span>
+                  </label>
+                </div>
+                <div className="dropdown__input">
+                  <label>
+                    <input type="checkbox" value="adult" name="adult" />
+                    <span>Adult</span>
+                  </label>
+                </div>
+                <div className="dropdown__input">
+                  <label>
+                    <input type="checkbox" value="senior" name="senior" />
+                    <span>Senior</span>
+                  </label>
+                </div>
               </div>
             </label>
           </div>
-          <div className="dropdown__city">
-            <label htmlFor="city">City</label>
-            <select name="city" id="city">
-              <option hidden value="">
-                {""}
+          <div>
+            <select name="city" id="city" className="dropdown__select">
+              <option hidden>Select a City</option>
+              <option value="" name="">
+                Select a City
               </option>
               <option value="airdrie" name="airdrie">
                 Airdrie
@@ -95,8 +109,17 @@ class DropdownFilter extends Component {
               </option>
             </select>
           </div>
-          <Button children={"View Matches"} />
-          <Button children={"Clear"} onClick={this.props.handleClear} />
+          <div className="dropdown__buttons">
+            <Button
+              children={"View Matches"}
+              className="dropdown__buttons-matches"
+            />
+            <Button
+              children={"Clear"}
+              onClick={this.props.handleClear}
+              className="dropdown__buttons-clear"
+            />
+          </div>
         </div>
       </form>
     );
