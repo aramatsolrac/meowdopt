@@ -1,14 +1,13 @@
 import "./Header.scss";
 import catIcon from "../../assets/icons/cat.png";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import DropDownMenu from "../DropDownMenu/DropDownMenu";
 
 function Header() {
   return (
-    <Link to="/" className="header">
+    <div className="header">
       <div className="header__mobile">
-        <div className="header__logo">
+        <Link to="/" className="header__logo">
           <img
             src={catIcon}
             alt=""
@@ -17,12 +16,12 @@ function Header() {
             className="header__img"
           />
           <p>meowdopt</p>
-        </div>
+        </Link>
         <div>
-          <FontAwesomeIcon icon={faBars} size="lg" className="header__menu" />
+          <DropDownMenu />
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 
