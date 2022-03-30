@@ -1,3 +1,4 @@
+import "./authHelper.scss";
 import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -24,7 +25,11 @@ export function login(userName, password, onSuccess) {
       MySwal.fire({
         position: "center",
         icon: "success",
-        title: "You are successfully logged in",
+        title: (
+          <p>
+            You are successfully <span className="logged__in">logged in.</span>
+          </p>
+        ),
         showConfirmButton: false,
         timer: 2000,
       });
@@ -49,7 +54,19 @@ export function isLoggedIn() {
 
 // logout user
 export function logout() {
+  const MySwal = withReactContent(Swal);
   sessionStorage.removeItem("userLoggedIn");
+  MySwal.fire({
+    position: "center",
+    icon: "success",
+    title: (
+      <p>
+        You are successfully <span className="logged__out">logged out.</span>
+      </p>
+    ),
+    showConfirmButton: false,
+    timer: 2000,
+  });
 }
 
 // get all data from the logged user
