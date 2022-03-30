@@ -17,7 +17,8 @@ class Profile extends Component {
             _selected={{ color: "#dea48f", bg: "#fff2ed" }}
             color="#dea48f"
             _hover={{ bg: "#ffd6c8" }}
-            _focus={{ outlineColor: "#fabfab" }}
+            _focus={{ outlineColor: "#fff2ed" }}
+            borderBottomColor="#fff2ed"
           >
             <FontAwesomeIcon
               icon={faHeart}
@@ -30,7 +31,8 @@ class Profile extends Component {
             _selected={{ color: "#dea48f", bg: "#fff2ed" }}
             color="#dea48f"
             _hover={{ bg: "#ffd6c8" }}
-            _focus={{ outlineColor: "#fabfab" }}
+            _focus={{ outlineColor: "#fff2ed" }}
+            borderBottomColor="#fff2ed"
           >
             <FontAwesomeIcon
               icon={faFile}
@@ -41,10 +43,10 @@ class Profile extends Component {
           </Tab>
         </TabList>
         <TabPanels>
-          <TabPanel id="favorites">
+          <TabPanel>
             <FavoritesCats />
           </TabPanel>
-          <TabPanel id="requests">
+          <TabPanel>
             <RequestsCats />
           </TabPanel>
         </TabPanels>
