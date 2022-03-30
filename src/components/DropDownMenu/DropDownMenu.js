@@ -2,7 +2,13 @@ import React, { Component } from "react";
 import "./DropDownMenu.scss";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faHeart,
+  faFile,
+  faUser,
+  faArrowRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 import { isLoggedIn, getLoggedUser } from "../../helpers/authHelper";
 
 // import Button from "./../Button/Button";
@@ -21,12 +27,49 @@ class DropDownMenu extends Component {
   renderDropDownMenu = () => {
     return (
       <form onSubmit={this.props.filterCats}>
-        <div className="dropdown__body">
-          <div>
-            <Link to={`/${getLoggedUser().id}/favorites`}>Favorites </Link>
-            <Link to={`/${getLoggedUser().id}/requests`}>Requests</Link>
+        <div className="dropdown__box">
+          <div className="dropdown__link">
+            <Link to={`/profile`} className="dropdown__link-favorites">
+              <FontAwesomeIcon
+                icon={faUser}
+                className="dropdown__icon"
+                size="lg"
+              />
+              Profile
+            </Link>
+            {/* <Link
+              to={`/${getLoggedUser().id}/favorites`}
+              className="dropdown__link-favorites"
+            >
+              <FontAwesomeIcon
+                icon={faHeart}
+                className="dropdown__icon"
+                size="lg"
+              />
+              Favorites
+            </Link>
+            <Link
+              to={`/${getLoggedUser().id}/requests`}
+              className="dropdown__link-requests"
+            >
+              <FontAwesomeIcon
+                icon={faFile}
+                className="dropdown__icon-requests"
+                size="lg"
+              />
+              Requests
+            </Link> */}
           </div>
-          <div>{/* <Link to="/logout">Log Out</Link> */}</div>
+          <div className="dropdown__link">
+            <Link to="/logout" className="dropdown__link-logout">
+              <FontAwesomeIcon
+                icon={faArrowRightFromBracket}
+                className="dropdown__icon-logout"
+                size="lg"
+              />
+              Log Out
+            </Link>
+          </div>
         </div>
       </form>
     );
