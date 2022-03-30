@@ -15,6 +15,7 @@ const baseURL = process.env.REACT_APP_API_URL;
 const catsURL = `${baseURL}/cats`;
 const requestURL = `${baseURL}/requests`;
 const favoriteCatsURL = `${baseURL}/users`;
+const requestCatsURL = `${baseURL}/users`;
 
 class CatDetails extends Component {
   state = {
@@ -22,11 +23,13 @@ class CatDetails extends Component {
     isCatRequested: false,
     isLiked: false,
     favoritesCats: [],
+    requestsCats: [],
   };
 
   componentDidMount() {
     this.fetchSelectedCat();
     this.fetchFavoriteCats();
+    this.fetchRequestCats();
   }
 
   fetchSelectedCat = () => {
@@ -114,6 +117,7 @@ class CatDetails extends Component {
               confirmButtonColor: "#dea48f",
               timer: 15000,
             });
+            this.fetchRequestCats();
           })
           .catch((error) => {
             console.log(error);
@@ -137,6 +141,28 @@ class CatDetails extends Component {
         );
         this.setState({
           isLiked: !foundFavCat ? false : true,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Error trying to fetch the API.");
+      });
+  };
+
+  fetchRequestCats = () => {
+    axios
+      .get(`${requestCatsURL}/${getLoggedUser().id}/requests`)
+      .then((response) => {
+        let requestsCats = response.data;
+        this.setState({
+          requestsCats: requestsCats,
+        });
+
+        const foundRequestCat = this.state.requestsCats.find(
+          (cat) => cat.catID === this.state.selectedCat.id
+        );
+        this.setState({
+          isCatRequested: !foundRequestCat ? false : true,
         });
       })
       .catch((error) => {
@@ -219,7 +245,16 @@ class CatDetails extends Component {
                 <p>{this.state.selectedCat.description}</p>
               </div>
               <div>
-                <Button children="Adopt me" onClick={this.handleSubmit} />
+                <button
+                  type="submit"
+                  onClick={this.handleSubmit}
+                  className={`${
+                    !this.state.isCatRequested ? `adopt` : `requested`
+                  }`}
+                  disabled={`${!this.state.isCatRequested ? "" : `{true}`}`}
+                >{`${
+                  !this.state.isCatRequested ? `Adopt Me` : `Requested`
+                }`}</button>
               </div>
               <div>
                 <FontAwesomeIcon
