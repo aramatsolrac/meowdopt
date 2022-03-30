@@ -4,7 +4,8 @@ import { Component } from "react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { getLoggedUser } from "../../helpers/authHelper";
 import CatsCard from "../../components/CatsCard/CatsCard";
-import { Button } from "@mui/material";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const baseURL = process.env.REACT_APP_API_URL;
 const requestCatsURL = `${baseURL}/users`;
@@ -32,18 +33,38 @@ class RequestsCats extends Component {
         alert("Error trying to fetch the API.");
       });
   };
-  handleDelete = (id) => {
-    axios
-      .delete(`${baseURL}/requests/${id}/delete`)
-      .then(() => {
-        this.fetchRequestCats();
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("Error trying to fetch the API.");
-      });
+  handleDelete = (id, index) => {
+    const MySwal = withReactContent(Swal);
+    MySwal.fire({
+      title: (
+        <p>
+          Are you sure you want to cancel the adoption request of{" "}
+          <span className="test">{`${
+            this.state.requestsCats[`${index}`].catName
+          }`}</span>
+          ?
+        </p>
+      ),
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d22d2d",
+      cancelButtonColor: "#dea48f",
+      confirmButtonText: "Delete",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`${baseURL}/requests/${id}/delete`)
+          .then(() => {
+            this.fetchRequestCats();
+          })
+          .catch((error) => {
+            console.log(error);
+            alert("Error trying to fetch the API.");
+          });
+      }
+    });
   };
-
   handleBack = () => {
     this.props.history.goBack();
   };
@@ -72,10 +93,12 @@ class RequestsCats extends Component {
               <p>
                 Status: <span>{item.status}</span>
               </p>
-              <button type="submit" onClick={() => this.handleDelete(item.id)}>
-                Delete
+              <button
+                type="submit"
+                onClick={() => this.handleDelete(item.id, index)}
+              >
+                Cancel
               </button>
-              {/* <Button children={"Delete"} /> */}
             </div>
           );
         })}
