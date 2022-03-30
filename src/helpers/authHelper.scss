@@ -1,0 +1,11 @@
+@import "./../styles/partials/global";
+
+.logged {
+  font-weight: bold;
+  &__in {
+    color: $color-secondary;
+  }
+  &__out {
+    color: $color-secondary-darker;
+  }
+}
