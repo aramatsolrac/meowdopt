@@ -1,1 +1,12 @@
 @import "./../../styles/partials/global";
+
+.profile {
+  &__icon {
+    background-color: inherit;
+    color: $color-secondary;
+    margin-right: 0.6rem;
+    &:hover {
+      background-color: $color-light-dark;
+    }
+  }
+}
