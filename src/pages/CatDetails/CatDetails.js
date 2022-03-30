@@ -14,16 +14,19 @@ import { isLoggedIn, getLoggedUser } from "../../helpers/authHelper";
 const baseURL = process.env.REACT_APP_API_URL;
 const catsURL = `${baseURL}/cats`;
 const requestURL = `${baseURL}/requests`;
+const favoriteCatsURL = `${baseURL}/users`;
 
 class CatDetails extends Component {
   state = {
     selectedCat: null,
     isCatRequested: false,
     isLiked: false,
+    favoritesCats: [],
   };
 
   componentDidMount() {
     this.fetchSelectedCat();
+    this.fetchFavoriteCats();
   }
 
   fetchSelectedCat = () => {
@@ -35,12 +38,6 @@ class CatDetails extends Component {
         this.setState({
           selectedCat: selectedCat,
         });
-        // TODO: fetch likes from user
-        // TODO: check if this car was liked
-        // TODO: set state
-        // this.setState({
-        //   isLiked: false,
-        // });
       })
       .catch((error) => {
         console.log(error);
@@ -126,6 +123,28 @@ class CatDetails extends Component {
     });
   };
 
+  fetchFavoriteCats = () => {
+    axios
+      .get(`${favoriteCatsURL}/${getLoggedUser().id}/favorites`)
+      .then((response) => {
+        let favoritesCats = response.data;
+        console.log(favoritesCats);
+        this.setState({
+          favoritesCats: favoritesCats,
+        });
+        const foundFavCat = this.state.favoritesCats.find(
+          (cat) => cat.catID === this.state.selectedCat.id
+        );
+        this.setState({
+          isLiked: !foundFavCat ? false : true,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Error trying to fetch the API.");
+      });
+  };
+
   handleLike = () => {
     if (!isLoggedIn()) {
       this.props.history.push("/login");
@@ -137,43 +156,41 @@ class CatDetails extends Component {
       userID: getLoggedUser().id,
     };
 
-    if (this.state.isLiked === false) {
+    const foundFavCat = this.state.favoritesCats.find(
+      (cat) => cat.catID === this.state.selectedCat.id
+    );
+
+    if (!foundFavCat) {
       axios
         .post(`${catsURL}/${this.state.selectedCat.id}/like`, data)
-        .then((response) => {
-          this.setState({
-            isLiked: true,
-          });
-        })
         .catch((error) => {
           console.log(error);
           alert("Error trying to fetch the API.");
         });
+      this.setState({
+        isLiked: true,
+      });
     } else {
       axios
         .delete(`${catsURL}/${this.state.selectedCat.id}/remove-like`)
-        .then((response) => {
-          this.setState({
-            isLiked: false,
-          });
-        })
         .catch((error) => {
           console.log(error);
           alert("Error trying to fetch the API.");
         });
+      this.setState({
+        isLiked: false,
+      });
     }
   };
 
   handleBack = () => {
     this.props.history.goBack();
   };
+
   render() {
     document.title = `${
       this.state.selectedCat && this.state.selectedCat.catName
     } | meowadopt`;
-
-    // const likeClass = this.state.isLiked === true ? "liked" : "";
-    // console.log("CatDetails");
 
     return (
       <>
