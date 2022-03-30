@@ -30,11 +30,9 @@
     border-radius: 1.5rem;
     background-color: white;
     font-size: 0.9rem;
-    // @include states;
-    // @include tablet {
-    //   margin-left: 0;
-    //   padding: 0.6rem 3rem 0.5rem 2.1rem;
-    // }
+    &:focus {
+      outline-color: $color-secondary;
+    }
   }
   input::placeholder {
     color: $color-secondary;
