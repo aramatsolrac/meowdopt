@@ -16,7 +16,6 @@ class Profile extends Component {
           <Tab
             _selected={{ color: "#dea48f", bg: "#fff2ed" }}
             color="#dea48f"
-            _hover={{ bg: "#ffd6c8" }}
             _focus={{ outlineColor: "#fff2ed" }}
             borderBottomColor="#fff2ed"
           >
@@ -30,7 +29,6 @@ class Profile extends Component {
           <Tab
             _selected={{ color: "#dea48f", bg: "#fff2ed" }}
             color="#dea48f"
-            _hover={{ bg: "#ffd6c8" }}
             _focus={{ outlineColor: "#fff2ed" }}
             borderBottomColor="#fff2ed"
           >
