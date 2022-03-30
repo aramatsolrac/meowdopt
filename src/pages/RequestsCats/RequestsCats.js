@@ -1,7 +1,6 @@
 import "./RequestsCats.scss";
 import axios from "axios";
 import { Component } from "react";
-import { ArrowBackIcon } from "@chakra-ui/icons";
 import { getLoggedUser } from "../../helpers/authHelper";
 import CatsCard from "../../components/CatsCard/CatsCard";
 import Swal from "sweetalert2";
@@ -76,10 +75,6 @@ class RequestsCats extends Component {
 
     return (
       <>
-        <div>
-          <h3>Requested Cats</h3>
-          <ArrowBackIcon onClick={this.handleBack} w={30} h={30} />
-        </div>
         {this.state.requestsCats.map((item, index) => {
           return (
             <div key={index}>
