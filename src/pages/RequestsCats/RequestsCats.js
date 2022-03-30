@@ -44,12 +44,12 @@ class RequestsCats extends Component {
           ?
         </p>
       ),
-      text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d22d2d",
+      confirmButtonText: "Yes, cancel it",
       cancelButtonColor: "#dea48f",
-      confirmButtonText: "Delete",
+      cancelButtonText: "No, I'm not sure",
     }).then((result) => {
       if (result.isConfirmed) {
         axios
