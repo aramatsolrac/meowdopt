@@ -4,6 +4,7 @@ import { Component } from "react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { getLoggedUser } from "../../helpers/authHelper";
 import CatsCard from "../../components/CatsCard/CatsCard";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
 const baseURL = process.env.REACT_APP_API_URL;
 const favoriteCatsURL = `${baseURL}/users`;
