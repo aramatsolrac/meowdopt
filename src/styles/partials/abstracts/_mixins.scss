@@ -56,8 +56,6 @@
   border-radius: 1rem;
   font-weight: 400;
   font-size: 1rem;
-  // @include border-all(0.0625rem, solid, $color-secondary);
-  // background-color: $color-secondary;
   @include states;
   &::placeholder {
     color: $color-secondary;
