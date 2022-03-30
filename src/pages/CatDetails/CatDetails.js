@@ -128,47 +128,51 @@ class CatDetails extends Component {
   };
 
   fetchFavoriteCats = () => {
-    axios
-      .get(`${favoriteCatsURL}/${getLoggedUser().id}/favorites`)
-      .then((response) => {
-        let favoritesCats = response.data;
-        console.log(favoritesCats);
-        this.setState({
-          favoritesCats: favoritesCats,
+    if (isLoggedIn()) {
+      axios
+        .get(`${favoriteCatsURL}/${getLoggedUser().id}/favorites`)
+        .then((response) => {
+          let favoritesCats = response.data;
+          console.log(favoritesCats);
+          this.setState({
+            favoritesCats: favoritesCats,
+          });
+          const foundFavCat = this.state.favoritesCats.find(
+            (cat) => cat.catID === this.state.selectedCat.id
+          );
+          this.setState({
+            isLiked: !foundFavCat ? false : true,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+          alert("Error trying to fetch the API.");
         });
-        const foundFavCat = this.state.favoritesCats.find(
-          (cat) => cat.catID === this.state.selectedCat.id
-        );
-        this.setState({
-          isLiked: !foundFavCat ? false : true,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("Error trying to fetch the API.");
-      });
+    }
   };
 
   fetchRequestCats = () => {
-    axios
-      .get(`${requestCatsURL}/${getLoggedUser().id}/requests`)
-      .then((response) => {
-        let requestsCats = response.data;
-        this.setState({
-          requestsCats: requestsCats,
-        });
+    if (isLoggedIn()) {
+      axios
+        .get(`${requestCatsURL}/${getLoggedUser().id}/requests`)
+        .then((response) => {
+          let requestsCats = response.data;
+          this.setState({
+            requestsCats: requestsCats,
+          });
 
-        const foundRequestCat = this.state.requestsCats.find(
-          (cat) => cat.catID === this.state.selectedCat.id
-        );
-        this.setState({
-          isCatRequested: !foundRequestCat ? false : true,
+          const foundRequestCat = this.state.requestsCats.find(
+            (cat) => cat.catID === this.state.selectedCat.id
+          );
+          this.setState({
+            isCatRequested: !foundRequestCat ? false : true,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+          alert("Error trying to fetch the API.");
         });
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("Error trying to fetch the API.");
-      });
+    }
   };
 
   handleLike = () => {
