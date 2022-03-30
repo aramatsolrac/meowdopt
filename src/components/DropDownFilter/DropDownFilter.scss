@@ -34,6 +34,7 @@
     padding: 0.7rem;
     border-radius: 1.5rem;
     margin: 0 0.5rem;
+    cursor: pointer;
     &:hover {
       background-color: $color-secondary-dark;
     }
@@ -87,6 +88,7 @@
     width: 100%;
     outline: none;
     font-size: 0.9rem;
+    cursor: pointer;
     &:hover,
     &:active,
     &:focus {
