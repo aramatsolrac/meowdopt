@@ -15,9 +15,18 @@ class DropDownMenu extends Component {
   };
 
   toggleDropdown = (e) => {
+    if (!this.state.dropdownVisible) {
+      document.addEventListener("click", this.handleOutsideClick, false);
+    } else {
+      document.removeEventListener("click", this.handleOutsideClick, false);
+    }
     this.setState((prevState) => ({
       dropdownVisible: !prevState.dropdownVisible,
     }));
+  };
+
+  handleOutsideClick = (e) => {
+    if (!this.node.contains(e.target)) this.toggleDropdown();
   };
 
   renderDropDownMenu = () => {
@@ -60,7 +69,12 @@ class DropDownMenu extends Component {
   render() {
     console.log("DropMenu");
     return (
-      <div className="dropdown__container">
+      <div
+        className="dropdown__container"
+        ref={(node) => {
+          this.node = node;
+        }}
+      >
         <div className="dropdown__trigger">
           <FontAwesomeIcon
             icon={faBars}
