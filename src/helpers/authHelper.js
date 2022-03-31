@@ -35,7 +35,7 @@ export function login(userName, password, onSuccess) {
       });
     })
     .catch((error) => {
-      //console.log(error.response);
+      console.log(error.response);
       MySwal.fire({
         position: "center",
         icon: "error",
