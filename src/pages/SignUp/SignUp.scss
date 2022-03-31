@@ -3,3 +3,59 @@
 .test.required {
   @include required;
 }
+
+.signUp {
+  display: flex;
+  flex-direction: column;
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+  &__label {
+    color: $color-secondary-darker;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  &__input {
+    background-color: inherit;
+    color: $color-secondary;
+    border: none;
+    border-bottom: solid 0.0625rem $color-secondary;
+    margin: 0 0 1rem 0;
+    padding: 0 0 0.5rem 0;
+    width: 100%;
+    outline: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+    &:hover,
+    &:active,
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      color: $color-secondary;
+    }
+  }
+  &__input.required {
+    @include required;
+  }
+  &__icon {
+    float: right;
+    position: relative;
+    bottom: 2.6rem;
+    background-color: inherit;
+    color: $color-secondary;
+    cursor: pointer;
+    &:hover {
+      background-color: $color-light-dark;
+    }
+  }
+  &__button {
+    @include button(
+      $color-secondary,
+      $color-light,
+      $color-secondary-dark,
+      100%
+    );
+  }
+}
