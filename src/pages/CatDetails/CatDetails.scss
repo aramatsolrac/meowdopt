@@ -1,42 +1,93 @@
 @import "./../../styles/partials/global";
 
-.test {
-  color: $color-secondary;
-}
+// .test {
+//   color: $color-secondary;
+// }
 
-.test2 {
+// .test2 {
+//   display: flex;
+//   flex-direction: row;
+//   width: 3rem;
+//   justify-content: space-around;
+//   align-items: center;
+// }
+
+// .test2 p {
+//   padding-top: 0.2rem;
+// }
+
+// .test3 {
+//   font-size: 1.5rem;
+// }
+
+// img {
+//   border-radius: 0.5rem;
+// }
+
+.catDetails {
   display: flex;
-  flex-direction: row;
-  width: 3rem;
-  justify-content: space-around;
-  align-items: center;
-}
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 1rem;
+  &__info,
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  &__shelter {
+    width: 100%;
+    padding: 1rem 0;
+    color: $color-secondary;
+    font-weight: bold;
+    word-spacing: 0.2rem;
+    font-size: 1rem;
+    border-bottom: solid 0.0625rem $color-secondary;
+    &-link {
+      cursor: pointer;
+      &:hover {
+        color: $color-secondary-dark;
+      }
+    }
+    &-icon {
+      padding-left: 0.5rem;
+    }
+  }
+  &__info {
+    color: $color-secondary;
+    font-weight: bold;
+    padding: 0.5rem 0;
+    border-bottom: solid 0.0625rem $color-secondary;
+  }
+  &__description {
+    padding: 1rem 0;
+  }
+  &__adopt {
+    @include button($color-secondary, $color-light, $color-primary, 10rem);
+  }
 
-.test2 p {
-  padding-top: 0.2rem;
-}
+  &__requested {
+    cursor: none;
+    @include button($color-tertiary, $color-light, $color-tertiary, 10rem);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
+  &__like {
+    cursor: pointer;
+    color: grey;
+  }
 
-.test3 {
-  font-size: 1.5rem;
-}
-
-img {
-  border-radius: 0.5rem;
-}
-.like {
-  cursor: pointer;
-  color: grey;
-}
-
-.liked {
-  color: red;
-  cursor: pointer;
-}
-
-.adopt {
-  background-color: lightblue;
-}
-
-.requested {
-  background-color: lightcoral;
+  &__liked {
+    color: $color-validation;
+    cursor: pointer;
+  }
+  &__back {
+    margin: 0 0 0.2rem 0.6rem;
+    cursor: pointer;
+    &:hover {
+      color: $color-secondary-dark;
+    }
+  }
 }
