@@ -1,7 +1,7 @@
 import "./SignUp.scss";
 import axios from "axios";
 import { Component } from "react";
-// import { isLoggedIn, getLoggedUser } from "../../helpers/authHelper";
+import Button from "../../components/Button/Button";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import formValidation from "../../helpers/formValidation";
@@ -110,45 +110,45 @@ class SignUp extends Component {
 
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <label>Name </label>
+        <form onSubmit={this.handleSubmit} className="signUp__form">
+          <div className="signUp__content">
+            <label className="signUp__label">Name</label>
             <input
               type="text"
               name="name"
-              className="test"
+              className="signUp__input"
               onChange={this.handleChangeName}
             />
           </div>
-          <div>
-            <label>Username </label>
+          <div className="signUp__content">
+            <label className="signUp__label">Username</label>
             <input
               type="text"
               name="username"
-              className="test"
+              className="signUp__input"
               onChange={this.handleChangeUsername}
             />
           </div>
-          <div>
-            <label>Email </label>
+          <div className="signUp__content">
+            <label className="signUp__label">Email</label>
             <input
               type="email"
               name="email"
-              className="test"
+              className="signUp__input"
               onChange={this.handleChangeEmail}
             />
           </div>
-          <div>
-            <label>Password </label>
+          <div className="signUp__content">
+            <label className="signUp__label">Password</label>
             <input
               type="text"
               name="password"
-              className="test"
+              className="signUp__input"
               onChange={this.handleChangePassword}
             />
           </div>
-          <div>
-            <input type="submit" />
+          <div className="signUp__content">
+            <Button children={"Sign Up"} className="signUp__button" />
           </div>
         </form>
       </div>
