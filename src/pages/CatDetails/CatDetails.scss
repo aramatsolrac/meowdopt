@@ -1,28 +1,30 @@
 @import "./../../styles/partials/global";
 
-// .test {
-//   color: $color-secondary;
-// }
+.alert {
+  font-size: 1.5rem;
 
-// .test2 {
-//   display: flex;
-//   flex-direction: row;
-//   width: 3rem;
-//   justify-content: space-around;
-//   align-items: center;
-// }
+  &__name {
+    color: $color-secondary;
+  }
+  &__icon {
+    display: flex;
+    flex-direction: row;
+    width: 3rem;
+    justify-content: space-around;
+    align-items: center;
 
-// .test2 p {
-//   padding-top: 0.2rem;
-// }
+    p {
+      padding-top: 0.2rem;
+    }
+  }
+  &__img {
+    border-radius: 0.5rem;
+  }
+}
 
-// .test3 {
-//   font-size: 1.5rem;
-// }
-
-// img {
-//   border-radius: 0.5rem;
-// }
+img {
+  border-radius: 0.5rem;
+}
 
 .catDetails {
   display: flex;
@@ -43,7 +45,6 @@
     padding: 1rem 0;
     color: $color-secondary;
     font-weight: bold;
-    word-spacing: 0.2rem;
     font-size: 1rem;
     border-bottom: solid 0.0625rem $color-secondary;
     &-link {
@@ -72,7 +73,6 @@
   &__requested {
     cursor: none;
     @include button($color-tertiary, $color-light, $color-tertiary, 10rem);
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   }
   &__like {
     cursor: pointer;
