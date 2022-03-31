@@ -1,4 +1,7 @@
-export function statusClass(requestStatus) {
+export function styleStatus(requestStatus) {
+  if (requestStatus === "Received") {
+    return "received";
+  }
   if (requestStatus === "In Review") {
     return "inReview";
   }
