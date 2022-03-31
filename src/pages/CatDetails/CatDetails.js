@@ -4,11 +4,7 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHeart,
-  faAngleRight,
-  faAngleLeft,
-} from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import CatsCard from "../../components/CatsCard/CatsCard";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -71,13 +67,13 @@ class CatDetails extends Component {
       title: (
         <p>
           Do you want to send an adoption request to{" "}
-          <span className="test">{this.state.selectedCat.catName}</span>?
+          <span className="alert__name">{this.state.selectedCat.catName}</span>?
         </p>
       ),
-      html: `<img src='${baseURL}${this.state.selectedCat.image}' alt="cat"/>`,
+      html: `<img src='${baseURL}${this.state.selectedCat.image}' alt="cat" />`,
       showCancelButton: true,
       confirmButtonText: (
-        <div className="test2">
+        <div className="alert__icon">
           <FontAwesomeIcon icon={faHeart} />
           <p>Yes</p>
         </div>
@@ -93,17 +89,17 @@ class CatDetails extends Component {
               position: "center",
               icon: "success",
               title: (
-                <div className="test3">
+                <div className="alert">
                   <p>Submitted!</p>
                   <p>
-                    <span className="test">
+                    <span className="alert__name">
                       {this.state.selectedCat.shelterName}{" "}
                     </span>{" "}
                     will contact you soon!
                   </p>
                   <p>
                     {" "}
-                    <span className="test">
+                    <span className="alert__name">
                       {this.state.selectedCat.catName}
                     </span>{" "}
                     is looking forward to meet you!
@@ -112,7 +108,7 @@ class CatDetails extends Component {
               ),
               showConfirmButton: true,
               confirmButtonText: (
-                <div className="test2">
+                <div className="alert__icon">
                   <FontAwesomeIcon icon={faHeart} />
                   <p>Ok</p>
                 </div>
@@ -140,12 +136,14 @@ class CatDetails extends Component {
           this.setState({
             favoritesCats: favoritesCats,
           });
+          // if (isLoggedIn()) {
           const foundFavCat = this.state.favoritesCats.find(
             (cat) => cat.catID === this.state.selectedCat.id
           );
           this.setState({
             isLiked: !foundFavCat ? false : true,
           });
+          // }
         })
         .catch((error) => {
           console.log(error);
@@ -163,13 +161,14 @@ class CatDetails extends Component {
           this.setState({
             requestsCats: requestsCats,
           });
-
+          // if (isLoggedIn()) {
           const foundRequestCat = this.state.requestsCats.find(
             (cat) => cat.catID === this.state.selectedCat.id
           );
           this.setState({
             isCatRequested: !foundRequestCat ? false : true,
           });
+          // }
         })
         .catch((error) => {
           console.log(error);
