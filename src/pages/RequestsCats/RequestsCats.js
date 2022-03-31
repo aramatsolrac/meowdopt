@@ -2,6 +2,7 @@ import "./RequestsCats.scss";
 import axios from "axios";
 import { Component } from "react";
 import { getLoggedUser } from "../../helpers/authHelper";
+import { styleStatus } from "../../helpers/styleStatus";
 import CatsCard from "../../components/CatsCard/CatsCard";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -38,7 +39,7 @@ class RequestsCats extends Component {
       title: (
         <p>
           Are you sure you want to cancel the adoption request of{" "}
-          <span className="test">{`${
+          <span className="alert__name">{`${
             this.state.requestsCats[`${index}`].catName
           }`}</span>
           ?
@@ -77,7 +78,7 @@ class RequestsCats extends Component {
       <>
         {this.state.requestsCats.map((item, index) => {
           return (
-            <div key={index}>
+            <div key={index} className="request">
               <CatsCard
                 key={index}
                 id={item.catID}
@@ -85,15 +86,23 @@ class RequestsCats extends Component {
                 catName={item.catName}
                 urlPath={"/cats"}
               />
-              <p>
-                Status: <span>{item.status}</span>
-              </p>
-              <button
-                type="submit"
-                onClick={() => this.handleDelete(item.id, index)}
-              >
-                Cancel
-              </button>
+              <div className="request__buttons">
+                <p className="request__status">
+                  <span
+                    className={`request__status ${styleStatus(item.status)}`}
+                  >
+                    {item.status}
+                  </span>
+                </p>
+
+                <button
+                  className="request__cancel"
+                  type="submit"
+                  onClick={() => this.handleDelete(item.id, index)}
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           );
         })}
