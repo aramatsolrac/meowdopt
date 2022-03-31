@@ -1,1 +1,44 @@
 @import "./../../styles/partials/global";
+
+.request {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0 3rem 0;
+  background-color: $color-light-dark;
+  @include border-all(0.0625rem, solid, $color-primary);
+
+  border-radius: 0.5rem;
+  box-shadow: rgba(165, 158, 149, 0.2) 0px 8px 24px;
+
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 0.5rem 1rem 0.5rem;
+  }
+  &__status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__status.received {
+    @include status(check, #84a59d);
+  }
+  &__status.inReview {
+    @include status(progress, #8ecae6);
+  }
+  &__status.approved {
+    @include status(paw, #88cab5);
+  }
+  &__status.declined {
+    @include status(declined, #f07167);
+  }
+  &__cancel {
+    color: $color-secondary;
+    font-weight: bold;
+    &:hover {
+      text-decoration: underline;
+      //   color: $color-light-dark;
+    }
+  }
+}
