@@ -4,9 +4,12 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHeart,
+  faAngleRight,
+  faAngleLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import CatsCard from "../../components/CatsCard/CatsCard";
-import Button from "../../components/Button/Button";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { isLoggedIn, getLoggedUser } from "../../helpers/authHelper";
@@ -176,6 +179,7 @@ class CatDetails extends Component {
   };
 
   handleLike = () => {
+    //TODO when dislike is not able to like again without refresh the page
     if (!isLoggedIn()) {
       this.props.history.push("/login");
       return;
@@ -221,10 +225,28 @@ class CatDetails extends Component {
     document.title = `${
       this.state.selectedCat && this.state.selectedCat.catName
     } | meowadopt`;
+    const isCatRequestedClass = !this.state.isCatRequested
+      ? `catDetails__adopt`
+      : `catDetails__requested`;
+    const isCatRequestedButton = !this.state.isCatRequested
+      ? `Adopt Me`
+      : `Requested`;
+    const isCatRequestedButtonDisabled = !this.state.isCatRequested
+      ? ""
+      : `{true}`;
+    const isLikedClass = !this.state.isLiked
+      ? `catDetails__like`
+      : `catDetails__liked`;
 
     return (
       <>
-        <ArrowBackIcon onClick={this.handleBack} w={30} h={30} />
+        <ArrowBackIcon
+          onClick={this.handleBack}
+          w={30}
+          h={30}
+          color={"#dea48f"}
+          className="catDetails__back"
+        />
         {this.state.selectedCat && (
           <>
             <CatsCard
@@ -233,40 +255,46 @@ class CatDetails extends Component {
               image={this.state.selectedCat.image}
               catName={this.state.selectedCat.catName}
             />
-            <div>
-              <div>
+            <div className="catDetails">
+              <div className="catDetails__info">
                 <p>{this.state.selectedCat.age}</p>
-              </div>
-              <div>
                 <p>{this.state.selectedCat.gender}</p>
               </div>
-              <div>
-                <Link to={`/shelters/${this.state.selectedCat.shelterID}`}>
+              <div className="catDetails__shelter">
+                <Link
+                  to={`/shelters/${this.state.selectedCat.shelterID}`}
+                  className="catDetails__shelter-link"
+                >
                   {this.state.selectedCat.shelterName}
+                  <FontAwesomeIcon
+                    icon={faAngleRight}
+                    size="lg"
+                    className="catDetails__shelter-icon"
+                  />
                 </Link>
               </div>
-              <div>
+              <div className="catDetails__description">
                 <p>{this.state.selectedCat.description}</p>
               </div>
-              <div>
-                <button
-                  type="submit"
-                  onClick={this.handleSubmit}
-                  className={`${
-                    !this.state.isCatRequested ? `adopt` : `requested`
-                  }`}
-                  disabled={`${!this.state.isCatRequested ? "" : `{true}`}`}
-                >{`${
-                  !this.state.isCatRequested ? `Adopt Me` : `Requested`
-                }`}</button>
-              </div>
-              <div>
-                <FontAwesomeIcon
-                  icon={faHeart}
-                  onClick={this.handleLike}
-                  className={`${!this.state.isLiked ? `like` : `liked`}`}
-                  size="lg"
-                />
+              <div className="catDetails__buttons">
+                <div>
+                  <button
+                    type="submit"
+                    onClick={this.handleSubmit}
+                    className={isCatRequestedClass}
+                    disabled={isCatRequestedButtonDisabled}
+                  >
+                    {isCatRequestedButton}
+                  </button>
+                </div>
+                <div>
+                  <FontAwesomeIcon
+                    icon={faHeart}
+                    onClick={this.handleLike}
+                    className={isLikedClass}
+                    size="lg"
+                  />
+                </div>
               </div>
             </div>
           </>
