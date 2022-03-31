@@ -99,10 +99,15 @@
     @include flex(row, center, space-between);
     width: 100%;
     &-matches {
-      @include button($color-secondary, $color-light, $color-secondary-dark);
+      @include button(
+        $color-secondary,
+        $color-light,
+        $color-secondary-dark,
+        8rem
+      );
     }
     &-clear {
-      @include button($color-light, $color-secondary, $color-light-dark);
+      @include button($color-light, $color-secondary, $color-light-dark, 8rem);
       @include border-all(0.0625rem, solid, $color-secondary);
     }
   }
