@@ -1,0 +1,13 @@
+@import "./../../styles/partials/global";
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  &__text {
+    font-weight: 400;
+    font-size: 0.6875rem;
+    color: $color-secondary;
+  }
+}
