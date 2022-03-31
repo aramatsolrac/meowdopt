@@ -1,1 +1,33 @@
 @import "./../../styles/partials/global";
+
+.shelter {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  color: $color-secondary;
+  &__name {
+    font-weight: bold;
+  }
+  &__name,
+  &__address,
+  &__email {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  &__email {
+    cursor: pointer;
+  }
+
+  &__icon {
+    width: 1.4rem;
+    margin-right: 0.5rem;
+  }
+  &__back {
+    margin: 0 0 0.2rem 0.6rem;
+    cursor: pointer;
+    &:hover {
+      color: $color-secondary-dark;
+    }
+  }
+}
