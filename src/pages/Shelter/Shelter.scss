@@ -8,12 +8,11 @@
   &__name {
     font-weight: bold;
   }
-  &__name,
-  &__address,
-  &__email {
+  &__content {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: flex-start;
   }
   &__email {
     cursor: pointer;

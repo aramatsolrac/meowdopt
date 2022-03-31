@@ -77,15 +77,15 @@ class Shelter extends Component {
         />
         {this.state.selectedShelter && (
           <div className="shelter">
-            <div className="shelter__name">
+            <div className="shelter__content">
               <FontAwesomeIcon
                 icon={faPaw}
                 size="lg"
                 className="shelter__icon"
               />
-              <p>{this.state.selectedShelter.name}</p>
+              <p className="shelter__name">{this.state.selectedShelter.name}</p>
             </div>
-            <div className="shelter__address">
+            <div className="shelter__content">
               <FontAwesomeIcon
                 icon={faLocationDot}
                 size="lg"
@@ -97,7 +97,7 @@ class Shelter extends Component {
                 {this.state.selectedShelter.city}
               </p>
             </div>
-            <div className="shelter__email">
+            <div className="shelter__content">
               <FontAwesomeIcon
                 icon={faEnvelope}
                 size="lg"
