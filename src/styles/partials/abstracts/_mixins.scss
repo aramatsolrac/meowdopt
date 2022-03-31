@@ -26,7 +26,7 @@
 
 // button default
 @mixin button($background-color, $color, $hover, $width) {
-  // width: 100%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   padding: 0.4rem 0.6rem 0.4rem 0.6rem;
   width: $width;
   background-color: $background-color;
@@ -38,6 +38,18 @@
   cursor: pointer;
   &:hover {
     background-color: $hover;
+  }
+}
+
+@mixin status($iconName, $color) {
+  width: 5.8rem;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: $color;
+  &:before {
+    content: url("./../../../assets/icons/#{$iconName}.svg");
+    float: left;
   }
 }
 
