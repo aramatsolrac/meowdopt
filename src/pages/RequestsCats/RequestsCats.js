@@ -75,10 +75,10 @@ class RequestsCats extends Component {
     } Requests | meowadopt`;
 
     return (
-      <>
+      <div className="request">
         {this.state.requestsCats.map((item, index) => {
           return (
-            <div key={index} className="request">
+            <div key={index} className="request__container">
               <CatsCard
                 key={index}
                 id={item.catID}
@@ -106,7 +106,7 @@ class RequestsCats extends Component {
             </div>
           );
         })}
-      </>
+      </div>
     );
   }
 }
