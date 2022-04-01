@@ -3,6 +3,9 @@ import { Component } from "react";
 import axios from "axios";
 import CatsCard from "../../components/CatsCard/CatsCard";
 import Search from "../../components/Search/Search";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleUp } from "@fortawesome/free-solid-svg-icons";
+
 const baseURL = process.env.REACT_APP_API_URL;
 const catsURL = `${baseURL}/cats`;
 
@@ -13,11 +16,24 @@ class Cats extends Component {
     searchInput: "",
     filteredCats: [],
     filterInput: "",
+    showScroll: false,
   };
 
   componentDidMount() {
     return this.fetchCats();
   }
+
+  checkScrollTop = () => {
+    if (!this.state.showScroll && window.pageYOffset > 400) {
+      this.setState({ showScroll: true });
+    } else if (this.state.showScroll && window.pageYOffset <= 400) {
+      this.setState({ showScroll: false });
+    }
+  };
+
+  scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   fetchCats = () => {
     axios
@@ -114,9 +130,10 @@ class Cats extends Component {
   render() {
     document.title = "Home | meowadopt";
     console.log("Cats");
+    window.addEventListener("scroll", this.checkScrollTop);
 
     return (
-      <div className="cats">
+      <div className="cats" style={{ minHeight: window.screen.height + 10 }}>
         <Search
           searchCats={this.searchCats}
           filterCats={this.filterCats}
@@ -134,6 +151,18 @@ class Cats extends Component {
               />
             );
           })}
+        </div>
+        <div className="scrollTop">
+          <FontAwesomeIcon
+            icon={faCircleUp}
+            size="2xl"
+            className="scrollTop__icon"
+            onClick={this.scrollTop}
+            style={{
+              height: 70,
+              display: this.state.showScroll ? "flex" : "none",
+            }}
+          />
         </div>
       </div>
     );
