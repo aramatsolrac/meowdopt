@@ -8,10 +8,47 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
+    margin-bottom: 4rem;
     @include desktop {
       justify-content: flex-start;
       padding-left: 3.3rem;
     }
+  }
+}
+
+.scrollTop {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include desktop {
+    @include wrap($max-width, $margin-center);
+  }
+
+  &__icon {
+    position: fixed;
+    background-color: white;
+    bottom: 50px;
+    border-radius: 50%;
+    z-index: 1000;
+    cursor: pointer;
+    animation: fadeIn 0.3s;
+    transition: opacity 0.4s;
+    color: $color-secondary;
+    opacity: 0.8;
+  }
+}
+
+.scrollTop:hover {
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.5;
   }
 }
