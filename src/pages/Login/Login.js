@@ -19,7 +19,6 @@ class Login extends Component {
     this.props.history.push("/");
   };
 
-  //TODO: add validation
   handleSubmit = (event) => {
     event.preventDefault();
     login(
@@ -32,10 +31,8 @@ class Login extends Component {
   handleClick = () => this.setState({ show: !this.state.show });
 
   render() {
-    console.log("Login");
-
     return (
-      <>
+      <div className="login">
         <Tabs isFitted variant="enclosed">
           <TabList mb="1em">
             <Tab
@@ -74,7 +71,7 @@ class Login extends Component {
             </TabPanel>
           </TabPanels>
         </Tabs>
-      </>
+      </div>
     );
   }
 }
