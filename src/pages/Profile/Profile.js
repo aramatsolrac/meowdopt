@@ -11,44 +11,46 @@ class Profile extends Component {
 
   render() {
     return (
-      <Tabs isFitted variant="enclosed">
-        <TabList mb="1em">
-          <Tab
-            _selected={{ color: "#dea48f", bg: "#fff2ed" }}
-            color="#dea48f"
-            _focus={{ outlineColor: "#fff2ed" }}
-            borderBottomColor="#fff2ed"
-          >
-            <FontAwesomeIcon
-              icon={faHeart}
-              className="profile__icon"
-              size="lg"
-            />
-            Favorites
-          </Tab>
-          <Tab
-            _selected={{ color: "#dea48f", bg: "#fff2ed" }}
-            color="#dea48f"
-            _focus={{ outlineColor: "#fff2ed" }}
-            borderBottomColor="#fff2ed"
-          >
-            <FontAwesomeIcon
-              icon={faFile}
-              className="profile__icon"
-              size="lg"
-            />
-            Requests
-          </Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>
-            <FavoritesCats />
-          </TabPanel>
-          <TabPanel>
-            <RequestsCats />
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+      <div className="profile">
+        <Tabs isFitted variant="enclosed">
+          <TabList mb="1em">
+            <Tab
+              _selected={{ color: "#dea48f", bg: "#fff2ed" }}
+              color="#dea48f"
+              _focus={{ outlineColor: "#fff2ed" }}
+              borderBottomColor="#fff2ed"
+            >
+              <FontAwesomeIcon
+                icon={faHeart}
+                className="profile__icon"
+                size="lg"
+              />
+              Favorites
+            </Tab>
+            <Tab
+              _selected={{ color: "#dea48f", bg: "#fff2ed" }}
+              color="#dea48f"
+              _focus={{ outlineColor: "#fff2ed" }}
+              borderBottomColor="#fff2ed"
+            >
+              <FontAwesomeIcon
+                icon={faFile}
+                className="profile__icon"
+                size="lg"
+              />
+              Requests
+            </Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <FavoritesCats />
+            </TabPanel>
+            <TabPanel>
+              <RequestsCats />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </div>
     );
   }
 }
