@@ -2,13 +2,21 @@
 
 .request {
   display: flex;
-  flex-direction: column;
-  margin: 1rem 0 3rem 0;
-  background-color: $color-light-dark;
-  @include border-all(0.0625rem, solid, $color-primary);
+  flex-wrap: wrap;
+  justify-content: center;
+  @include desktop {
+    justify-content: flex-start;
+    margin-left: 1rem;
+  }
 
-  border-radius: 0.5rem;
-  box-shadow: rgba(165, 158, 149, 0.2) 0px 8px 24px;
+  &__container {
+    margin: 1rem 0.5rem;
+    background-color: $color-light-dark;
+    min-width: 17rem;
+    max-width: 17rem;
+    border-radius: 0.5rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
 
   &__buttons {
     display: flex;
