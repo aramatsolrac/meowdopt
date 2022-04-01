@@ -27,11 +27,17 @@ img {
 }
 
 .catDetails {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  margin: 1rem;
+  @include desktop {
+    @include wrap($max-width, $margin-center);
+    width: 50rem;
+  }
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 1rem;
+  }
   &__info,
   &__buttons {
     display: flex;
@@ -84,7 +90,7 @@ img {
     cursor: pointer;
   }
   &__back {
-    margin: 0 0 0.2rem 0.6rem;
+    margin: 1rem 0 0.2rem 0.6rem;
     cursor: pointer;
     &:hover {
       color: $color-secondary-dark;
