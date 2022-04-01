@@ -11,7 +11,7 @@ class Profile extends Component {
 
   render() {
     return (
-      <div className="profile">
+      <div className="profile" style={{ minHeight: window.screen.height + 10 }}>
         <Tabs isFitted variant="enclosed">
           <TabList mb="1em">
             <Tab

@@ -67,7 +67,7 @@ class Shelter extends Component {
       this.state.selectedShelter && this.state.selectedShelter.name
     } | meowadopt`;
     return (
-      <div className="shelter">
+      <div className="shelter" style={{ minHeight: window.screen.height + 10 }}>
         <ArrowBackIcon
           onClick={this.handleBack}
           w={30}
