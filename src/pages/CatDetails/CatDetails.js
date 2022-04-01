@@ -238,7 +238,10 @@ class CatDetails extends Component {
       : `catDetails__liked`;
 
     return (
-      <div className="catDetails">
+      <div
+        className="catDetails"
+        style={{ minHeight: window.screen.height + 10 }}
+      >
         <ArrowBackIcon
           onClick={this.handleBack}
           w={30}
