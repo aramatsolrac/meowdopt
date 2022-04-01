@@ -67,7 +67,7 @@ class Shelter extends Component {
       this.state.selectedShelter && this.state.selectedShelter.name
     } | meowadopt`;
     return (
-      <>
+      <div className="shelter">
         <ArrowBackIcon
           onClick={this.handleBack}
           w={30}
@@ -76,7 +76,7 @@ class Shelter extends Component {
           className="shelter__back"
         />
         {this.state.selectedShelter && (
-          <div className="shelter">
+          <div className="shelter__container">
             <div className="shelter__content">
               <FontAwesomeIcon
                 icon={faPaw}
@@ -110,25 +110,28 @@ class Shelter extends Component {
                     `_blank`
                   )
                 }
+                className="shelter__email"
               >
                 {this.state.selectedShelter.email}
               </p>
             </div>
           </div>
         )}
-        {this.state.shelterCats &&
-          this.state.shelterCats.map((item, index) => {
-            return (
-              <CatsCard
-                key={index}
-                id={item.id}
-                image={item.image}
-                catName={item.catName}
-                urlPath={"/cats"}
-              />
-            );
-          })}
-      </>
+        <div className="shelter__cats">
+          {this.state.shelterCats &&
+            this.state.shelterCats.map((item, index) => {
+              return (
+                <CatsCard
+                  key={index}
+                  id={item.id}
+                  image={item.image}
+                  catName={item.catName}
+                  urlPath={"/cats"}
+                />
+              );
+            })}
+        </div>
+      </div>
     );
   }
 }
