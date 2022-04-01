@@ -28,7 +28,8 @@
     object-fit: cover;
     object-position: center;
     cursor: pointer;
-    &:hover {
+    &:hover,
+    &:focus {
       filter: opacity(0.5);
       transition: all ease-in-out 0.2s;
     }
