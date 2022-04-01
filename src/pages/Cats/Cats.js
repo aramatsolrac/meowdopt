@@ -116,24 +116,26 @@ class Cats extends Component {
     console.log("Cats");
 
     return (
-      <>
+      <div className="cats">
         <Search
           searchCats={this.searchCats}
           filterCats={this.filterCats}
           handleClear={this.handleClear}
         />
-        {this.state.searchedCats.map((item, index) => {
-          return (
-            <CatsCard
-              key={index}
-              id={item.id}
-              image={item.image}
-              catName={item.catName}
-              urlPath={"cats"}
-            />
-          );
-        })}
-      </>
+        <div className="cats__container">
+          {this.state.searchedCats.map((item, index) => {
+            return (
+              <CatsCard
+                key={index}
+                id={item.id}
+                image={item.image}
+                catName={item.catName}
+                urlPath={"cats"}
+              />
+            );
+          })}
+        </div>
+      </div>
     );
   }
 }
