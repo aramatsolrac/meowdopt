@@ -238,7 +238,7 @@ class CatDetails extends Component {
       : `catDetails__liked`;
 
     return (
-      <>
+      <div className="catDetails">
         <ArrowBackIcon
           onClick={this.handleBack}
           w={30}
@@ -254,7 +254,7 @@ class CatDetails extends Component {
               image={this.state.selectedCat.image}
               catName={this.state.selectedCat.catName}
             />
-            <div className="catDetails">
+            <div className="catDetails__container">
               <div className="catDetails__info">
                 <p>{this.state.selectedCat.age}</p>
                 <p>{this.state.selectedCat.gender}</p>
@@ -298,7 +298,7 @@ class CatDetails extends Component {
             </div>
           </>
         )}
-      </>
+      </div>
     );
   }
 }
