@@ -1,1 +1,17 @@
 @import "./../../styles/partials/global";
+
+.cats {
+  @include desktop {
+    @include wrap($max-width, $margin-center);
+  }
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @include desktop {
+      justify-content: flex-start;
+      padding-left: 3.3rem;
+    }
+  }
+}
