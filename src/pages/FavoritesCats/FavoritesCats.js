@@ -44,7 +44,7 @@ class FavoritesCats extends Component {
     console.log("Favorites");
 
     return (
-      <>
+      <div className="favoritesCats">
         {this.state.favoritesCats.map((item, index) => {
           return (
             <CatsCard
@@ -56,7 +56,7 @@ class FavoritesCats extends Component {
             />
           );
         })}
-      </>
+      </div>
     );
   }
 }
