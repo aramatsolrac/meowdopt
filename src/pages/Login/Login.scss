@@ -3,3 +3,16 @@
 .test.required {
   @include required;
 }
+
+.login {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 0.3rem;
+  margin: 1rem;
+  @include tablet {
+    @include wrap($max-width, $margin-center);
+    margin-top: 2rem;
+    width: 35rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 0.3rem;
+  }
+}
