@@ -32,45 +32,47 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login">
-        <Tabs isFitted variant="enclosed">
-          <TabList mb="1em">
-            <Tab
-              _selected={{ color: "#dea48f", bg: "#fff2ed" }}
-              color="#dea48f"
-              _focus={{ outlineColor: "#fff2ed" }}
-              borderBottomColor="#fff2ed"
-            >
-              <FontAwesomeIcon
-                icon={faArrowRightToBracket}
-                className="profile__icon"
-                size="lg"
-              />
-              Sign In
-            </Tab>
-            <Tab
-              _selected={{ color: "#dea48f", bg: "#fff2ed" }}
-              color="#dea48f"
-              _focus={{ outlineColor: "#fff2ed" }}
-              borderBottomColor="#fff2ed"
-            >
-              <FontAwesomeIcon
-                icon={faUserPlus}
-                className="profile__icon"
-                size="lg"
-              />
-              Sign Up
-            </Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              <SignIn history={this.props.history} />
-            </TabPanel>
-            <TabPanel>
-              <SignUp history={this.props.history} />
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+      <div className="login" style={{ minHeight: window.screen.height + 10 }}>
+        <div className="login__wrapper">
+          <Tabs isFitted variant="enclosed">
+            <TabList mb="1em">
+              <Tab
+                _selected={{ color: "#dea48f", bg: "#fff2ed" }}
+                color="#dea48f"
+                _focus={{ outlineColor: "#fff2ed" }}
+                borderBottomColor="#fff2ed"
+              >
+                <FontAwesomeIcon
+                  icon={faArrowRightToBracket}
+                  className="profile__icon"
+                  size="lg"
+                />
+                Sign In
+              </Tab>
+              <Tab
+                _selected={{ color: "#dea48f", bg: "#fff2ed" }}
+                color="#dea48f"
+                _focus={{ outlineColor: "#fff2ed" }}
+                borderBottomColor="#fff2ed"
+              >
+                <FontAwesomeIcon
+                  icon={faUserPlus}
+                  className="profile__icon"
+                  size="lg"
+                />
+                Sign Up
+              </Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                <SignIn history={this.props.history} />
+              </TabPanel>
+              <TabPanel>
+                <SignUp history={this.props.history} />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+        </div>
       </div>
     );
   }
