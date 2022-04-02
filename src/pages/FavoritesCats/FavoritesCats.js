@@ -1,47 +1,25 @@
 import "./FavoritesCats.scss";
-import axios from "axios";
 import { Component } from "react";
 import { getLoggedUser } from "../../helpers/authHelper";
+import { fetchFavoriteCats } from "../../helpers/serverHelper";
 import CatsCard from "../../components/CatsCard/CatsCard";
-
-const baseURL = process.env.REACT_APP_API_URL;
-const favoriteCatsURL = `${baseURL}/users`;
 
 class FavoritesCats extends Component {
   state = {
     favoritesCats: [],
   };
 
-  componentDidMount() {
-    this.fetchFavoriteCats();
+  async componentDidMount() {
+    const favoritesCats = await fetchFavoriteCats(getLoggedUser().id);
+    this.setState({
+      favoritesCats: favoritesCats,
+    });
   }
-
-  fetchFavoriteCats = () => {
-    axios
-      .get(`${favoriteCatsURL}/${getLoggedUser().id}/favorites`)
-      .then((response) => {
-        let favoritesCats = response.data;
-        console.log(favoritesCats);
-        this.setState({
-          favoritesCats: favoritesCats,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("Error trying to fetch the API.");
-      });
-  };
-
-  handleBack = () => {
-    this.props.history.goBack();
-  };
 
   render() {
     document.title = `${
       this.state.favoritesCats[0] && this.state.favoritesCats[0].userName
     } Favorites Cats | meowadopt`;
-
-    console.log("Favorites");
 
     return (
       <div className="favoritesCats">
