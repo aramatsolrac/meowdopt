@@ -1,13 +1,10 @@
 import "./Cats.scss";
 import { Component } from "react";
-import axios from "axios";
-import CatsCard from "../../components/CatsCard/CatsCard";
-import Search from "../../components/Search/Search";
+import { fetchCats } from "../../helpers/serverHelper";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUp } from "@fortawesome/free-solid-svg-icons";
-
-const baseURL = process.env.REACT_APP_API_URL;
-const catsURL = `${baseURL}/cats`;
+import CatsCard from "../../components/CatsCard/CatsCard";
+import Search from "../../components/Search/Search";
 
 class Cats extends Component {
   state = {
@@ -19,8 +16,12 @@ class Cats extends Component {
     showScroll: false,
   };
 
-  componentDidMount() {
-    return this.fetchCats();
+  async componentDidMount() {
+    const cats = await fetchCats();
+    this.setState({
+      cats: cats,
+      searchedCats: cats,
+    });
   }
 
   checkScrollTop = () => {
@@ -33,23 +34,6 @@ class Cats extends Component {
 
   scrollTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  fetchCats = () => {
-    axios
-      .get(catsURL)
-      .then((response) => {
-        let cats = response.data;
-        console.log(cats);
-        this.setState({
-          cats: cats,
-          searchedCats: cats,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("Error trying to fetch the API.");
-      });
   };
 
   // function to search cats
@@ -108,7 +92,6 @@ class Cats extends Component {
       );
     }
 
-    console.log({ city });
     if (city !== "Select a City" && city !== "") {
       filteredCats = filteredCats.filter((cat) => {
         return cat.city.toLowerCase().includes(city.toLowerCase());
@@ -122,7 +105,7 @@ class Cats extends Component {
 
   // function to clear filter
   handleClear = (event) => {
-    this.fetchCats();
+    fetchCats();
     const form = event.target.parentNode.parentNode.parentNode;
     form.reset();
   };
