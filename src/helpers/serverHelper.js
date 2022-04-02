@@ -7,6 +7,18 @@ const favoriteCatsURL = `${baseURL}/users`;
 const requestCatsURL = `${baseURL}/users`;
 const requestURL = `${baseURL}/requests`;
 
+export function fetchCats() {
+  return axios
+    .get(catsURL)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      alert("Error trying to fetch the API.");
+    });
+}
+
 export const fetchSelectedCat = (catID) => {
   return axios
     .get(`${catsURL}/${catID}`)
