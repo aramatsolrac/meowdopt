@@ -13,10 +13,10 @@ import {
   catRequest,
   baseURL,
 } from "../../helpers/serverHelper";
+import { isLoggedIn, getLoggedUser } from "../../helpers/authHelper";
 import CatsCard from "../../components/CatsCard/CatsCard";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { isLoggedIn, getLoggedUser } from "../../helpers/authHelper";
 
 class CatDetails extends Component {
   state = {
