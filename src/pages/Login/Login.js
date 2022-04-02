@@ -31,17 +31,19 @@ class Login extends Component {
   handleClick = () => this.setState({ show: !this.state.show });
 
   render() {
+    const tabStyle = {
+      _selected: { color: "#dea48f", bg: "#fff2ed" },
+      color: "#dea48f",
+      _focus: { outlineColor: "#fff2ed" },
+      borderBottomColor: "#fff2ed",
+    };
+
     return (
       <div className="login" style={{ minHeight: window.screen.height + 10 }}>
         <div className="login__wrapper">
           <Tabs isFitted variant="enclosed">
             <TabList mb="1em">
-              <Tab
-                _selected={{ color: "#dea48f", bg: "#fff2ed" }}
-                color="#dea48f"
-                _focus={{ outlineColor: "#fff2ed" }}
-                borderBottomColor="#fff2ed"
-              >
+              <Tab sx={tabStyle}>
                 <FontAwesomeIcon
                   icon={faArrowRightToBracket}
                   className="profile__icon"
@@ -49,12 +51,7 @@ class Login extends Component {
                 />
                 Sign In
               </Tab>
-              <Tab
-                _selected={{ color: "#dea48f", bg: "#fff2ed" }}
-                color="#dea48f"
-                _focus={{ outlineColor: "#fff2ed" }}
-                borderBottomColor="#fff2ed"
-              >
+              <Tab sx={tabStyle}>
                 <FontAwesomeIcon
                   icon={faUserPlus}
                   className="profile__icon"
