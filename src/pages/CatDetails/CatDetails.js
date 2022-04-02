@@ -1,51 +1,61 @@
 import "./CatDetails.scss";
-import axios from "axios";
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  fetchSelectedCat,
+  fetchFavoriteCats,
+  fetchRequestCats,
+  likeCat,
+  removeLikeCat,
+  catRequest,
+  baseURL,
+} from "../../helpers/serverHelper";
 import CatsCard from "../../components/CatsCard/CatsCard";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { isLoggedIn, getLoggedUser } from "../../helpers/authHelper";
 
-const baseURL = process.env.REACT_APP_API_URL;
-const catsURL = `${baseURL}/cats`;
-const requestURL = `${baseURL}/requests`;
-const favoriteCatsURL = `${baseURL}/users`;
-const requestCatsURL = `${baseURL}/users`;
-
 class CatDetails extends Component {
   state = {
     selectedCat: null,
     isCatRequested: false,
-    isLiked: false,
-    favoritesCats: [],
-    requestsCats: [],
+    isCatLiked: false,
   };
 
-  componentDidMount() {
-    this.fetchSelectedCat();
-    this.fetchFavoriteCats();
-    this.fetchRequestCats();
+  async componentDidMount() {
+    const selectedCat = await fetchSelectedCat(this.props.match.params.id);
+
+    this.setState({
+      selectedCat: selectedCat,
+    });
+
+    this.updateLikeAndRequest();
   }
 
-  fetchSelectedCat = () => {
-    axios
-      .get(`${catsURL}/${this.props.match.params.id}`)
-      .then((response) => {
-        let selectedCat = response.data;
-        console.log(selectedCat);
-        this.setState({
-          selectedCat: selectedCat,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("Error trying to fetch the API.");
-      });
-  };
+  async updateLikeAndRequest() {
+    if (!isLoggedIn()) {
+      return;
+    }
+
+    const favoritesCats = await fetchFavoriteCats(getLoggedUser().id);
+    const requestsCats = await fetchRequestCats(getLoggedUser().id);
+
+    const foundFavCat = favoritesCats.find(
+      (cat) => cat.catID === this.state.selectedCat.id
+    );
+
+    const foundRequestCat = requestsCats.find(
+      (cat) => cat.catID === this.state.selectedCat.id
+    );
+
+    this.setState({
+      isCatRequested: !foundRequestCat ? false : true,
+      isCatLiked: !foundFavCat ? false : true,
+    });
+  }
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -56,13 +66,7 @@ class CatDetails extends Component {
     }
 
     const MySwal = withReactContent(Swal);
-    const data = {
-      catID: this.state.selectedCat.id,
-      userID: getLoggedUser().id,
-      name: getLoggedUser().name,
-      email: getLoggedUser().email,
-      status: "Received",
-    };
+
     MySwal.fire({
       title: (
         <p>
@@ -81,10 +85,11 @@ class CatDetails extends Component {
       confirmButtonColor: "#dea48f",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .post(`${requestURL}/${this.props.match.params.id}/form`, data)
-          .then((response) => {
-            console.log(response.data);
+        catRequest(
+          this.state.selectedCat.id,
+          getLoggedUser(),
+          "Received",
+          () => {
             MySwal.fire({
               position: "center",
               icon: "success",
@@ -116,108 +121,28 @@ class CatDetails extends Component {
               confirmButtonColor: "#dea48f",
               timer: 15000,
             });
-            this.fetchRequestCats();
-          })
-          .catch((error) => {
-            console.log(error);
-            alert("Error trying to fetch the API.");
-          });
+            this.updateLikeAndRequest();
+          }
+        );
       }
     });
   };
 
-  fetchFavoriteCats = () => {
-    if (isLoggedIn()) {
-      axios
-        .get(`${favoriteCatsURL}/${getLoggedUser().id}/favorites`)
-        .then((response) => {
-          let favoritesCats = response.data;
-          console.log(favoritesCats);
-          this.setState({
-            favoritesCats: favoritesCats,
-          });
-          // if (isLoggedIn()) {
-          const foundFavCat = this.state.favoritesCats.find(
-            (cat) => cat.catID === this.state.selectedCat.id
-          );
-          this.setState({
-            isLiked: !foundFavCat ? false : true,
-          });
-          // }
-        })
-        .catch((error) => {
-          console.log(error);
-          alert("Error trying to fetch the API.");
-        });
-    }
-  };
-
-  fetchRequestCats = () => {
-    if (isLoggedIn()) {
-      axios
-        .get(`${requestCatsURL}/${getLoggedUser().id}/requests`)
-        .then((response) => {
-          let requestsCats = response.data;
-          this.setState({
-            requestsCats: requestsCats,
-          });
-          // if (isLoggedIn()) {
-          const foundRequestCat = this.state.requestsCats.find(
-            (cat) => cat.catID === this.state.selectedCat.id
-          );
-          this.setState({
-            isCatRequested: !foundRequestCat ? false : true,
-          });
-          // }
-        })
-        .catch((error) => {
-          console.log(error);
-          alert("Error trying to fetch the API.");
-        });
-    }
-  };
-
   handleLike = () => {
-    //TODO when dislike is not able to like again without refresh the page
     if (!isLoggedIn()) {
       this.props.history.push("/login");
       return;
     }
 
-    const data = {
-      catID: this.state.selectedCat.id,
-      userID: getLoggedUser().id,
-    };
-
-    const foundFavCat = this.state.favoritesCats.find(
-      (cat) => cat.catID === this.state.selectedCat.id
-    );
-
-    if (!foundFavCat) {
-      axios
-        .post(`${catsURL}/${this.state.selectedCat.id}/like`, data)
-        .catch((error) => {
-          console.log(error);
-          alert("Error trying to fetch the API.");
-        });
-      this.setState({
-        isLiked: true,
-      });
+    if (!this.state.isCatLiked) {
+      likeCat(this.state.selectedCat.id, getLoggedUser().id, () =>
+        this.updateLikeAndRequest()
+      );
     } else {
-      axios
-        .delete(`${catsURL}/${this.state.selectedCat.id}/remove-like`)
-        .catch((error) => {
-          console.log(error);
-          alert("Error trying to fetch the API.");
-        });
-      this.setState({
-        isLiked: false,
-      });
+      removeLikeCat(this.state.selectedCat.id, () =>
+        this.updateLikeAndRequest()
+      );
     }
-  };
-
-  handleBack = () => {
-    this.props.history.goBack();
   };
 
   render() {
@@ -233,7 +158,7 @@ class CatDetails extends Component {
     const isCatRequestedButtonDisabled = !this.state.isCatRequested
       ? ""
       : `{true}`;
-    const isLikedClass = !this.state.isLiked
+    const isCatLikedClass = !this.state.isCatLiked
       ? `catDetails__like`
       : `catDetails__liked`;
 
@@ -243,7 +168,7 @@ class CatDetails extends Component {
         style={{ minHeight: window.screen.height + 10 }}
       >
         <ArrowBackIcon
-          onClick={this.handleBack}
+          onClick={this.props.history.goBack}
           w={30}
           h={30}
           color={"#dea48f"}
@@ -293,7 +218,7 @@ class CatDetails extends Component {
                   <FontAwesomeIcon
                     icon={faHeart}
                     onClick={this.handleLike}
-                    className={isLikedClass}
+                    className={isCatLikedClass}
                     size="lg"
                   />
                 </div>
