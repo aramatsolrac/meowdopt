@@ -2,9 +2,10 @@
 import "./SignIn.scss";
 import { Component } from "react";
 import { login } from "../../helpers/authHelper";
-import Button from "../../components/Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faLock } from "@fortawesome/free-solid-svg-icons";
+import Button from "../../components/Button/Button";
+
 class SignIn extends Component {
   state = {
     show: false,
@@ -14,7 +15,6 @@ class SignIn extends Component {
     this.props.history.push("/");
   };
 
-  //TODO: add validation
   handleSubmit = (event) => {
     event.preventDefault();
     login(
@@ -27,7 +27,22 @@ class SignIn extends Component {
   handleClick = () => this.setState({ show: !this.state.show });
 
   render() {
-    console.log("Login");
+    const showHideText = this.state.show ? "text" : "password";
+    const showHideIcon = this.state.show ? (
+      <FontAwesomeIcon
+        icon={faLock}
+        size="lg"
+        onClick={this.handleClick}
+        className="signIn__icon"
+      />
+    ) : (
+      <FontAwesomeIcon
+        icon={faEye}
+        size="lg"
+        onClick={this.handleClick}
+        className="signIn__icon"
+      />
+    );
 
     return (
       <div>
@@ -47,27 +62,10 @@ class SignIn extends Component {
               placeholder="Enter your password"
               name="password"
               className="signIn__input"
-              type={this.state.show ? "text" : "password"}
+              type={showHideText}
             />
             <div>
-              <p>
-                {" "}
-                {this.state.show ? (
-                  <FontAwesomeIcon
-                    icon={faLock}
-                    size="lg"
-                    onClick={this.handleClick}
-                    className="signIn__icon"
-                  />
-                ) : (
-                  <FontAwesomeIcon
-                    icon={faEye}
-                    size="lg"
-                    onClick={this.handleClick}
-                    className="signIn__icon"
-                  />
-                )}
-              </p>
+              <p>{showHideIcon}</p>
             </div>
           </div>
           <div className="signIn__content">

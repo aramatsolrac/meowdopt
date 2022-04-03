@@ -12,6 +12,7 @@ function Profile() {
     _focus: { outlineColor: "#fff2ed" },
     borderBottomColor: "#fff2ed",
   };
+
   return (
     <div className="profile" style={{ minHeight: window.screen.height + 30 }}>
       <Tabs isFitted variant="enclosed">

@@ -6,6 +6,13 @@ const catsURL = `${baseURL}/cats`;
 const favoriteCatsURL = `${baseURL}/users`;
 const requestCatsURL = `${baseURL}/users`;
 const requestURL = `${baseURL}/requests`;
+const sheltersURL = `${baseURL}/shelters`;
+const signUpURL = `${baseURL}/users/signup`;
+
+const handleErrorMessage = (error) => {
+  console.log(error);
+  alert("Error trying to fetch the API.");
+};
 
 export function fetchCats() {
   return axios
@@ -14,8 +21,7 @@ export function fetchCats() {
       return response.data;
     })
     .catch((error) => {
-      console.log(error);
-      alert("Error trying to fetch the API.");
+      handleErrorMessage(error);
     });
 }
 
@@ -26,8 +32,7 @@ export const fetchSelectedCat = (catID) => {
       return response.data;
     })
     .catch((error) => {
-      console.log(error);
-      alert("Error trying to fetch the API.");
+      handleErrorMessage(error);
     });
 };
 
@@ -38,8 +43,7 @@ export const fetchFavoriteCats = (userID) => {
       return response.data;
     })
     .catch((error) => {
-      console.log(error);
-      alert("Error trying to fetch the API.");
+      handleErrorMessage(error);
     });
 };
 
@@ -50,8 +54,7 @@ export const fetchRequestCats = (userID) => {
       return response.data;
     })
     .catch((error) => {
-      console.log(error);
-      alert("Error trying to fetch the API.");
+      handleErrorMessage(error);
     });
 };
 
@@ -65,8 +68,7 @@ export const likeCat = (catID, userID, handleSuccess) => {
     .post(`${catsURL}/${catID}/like`, data)
     .then(() => handleSuccess())
     .catch((error) => {
-      console.log(error);
-      alert("Error trying to fetch the API.");
+      handleErrorMessage(error);
     });
 };
 
@@ -75,8 +77,7 @@ export const removeLikeCat = (catID, handleSuccess) => {
     .delete(`${catsURL}/${catID}/remove-like`)
     .then(() => handleSuccess())
     .catch((error) => {
-      console.log(error);
-      alert("Error trying to fetch the API.");
+      handleErrorMessage(error);
     });
 };
 
@@ -92,7 +93,52 @@ export const catRequest = (catID, user, status, handleSuccess) => {
     .post(`${requestURL}/${user.id}/form`, data)
     .then(() => handleSuccess())
     .catch((error) => {
-      console.log(error);
-      alert("Error trying to fetch the API.");
+      handleErrorMessage(error);
+    });
+};
+
+export const deleteRequest = (requestID, handleSuccess) => {
+  axios
+    .delete(`${requestURL}/${requestID}/delete`)
+    .then(() => handleSuccess())
+    .catch((error) => {
+      handleErrorMessage(error);
+    });
+};
+
+export const fetchShelterCats = (shelterID) => {
+  return axios
+    .get(`${sheltersURL}/${shelterID}/cats`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      handleErrorMessage(error);
+    });
+};
+
+export const fetchSelectedShelter = (shelterID) => {
+  return axios
+    .get(`${sheltersURL}/${shelterID}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      handleErrorMessage(error);
+    });
+};
+
+export const signUp = (name, username, email, password, handleSuccess) => {
+  const data = {
+    name: name,
+    username: username,
+    email: email,
+    password: password,
+  };
+  return axios
+    .post(`${signUpURL}`, data)
+    .then(() => handleSuccess())
+    .catch((error) => {
+      handleErrorMessage(error);
     });
 };

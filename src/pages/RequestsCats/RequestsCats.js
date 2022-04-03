@@ -1,14 +1,11 @@
 import "./RequestsCats.scss";
-import axios from "axios";
 import { Component } from "react";
 import { getLoggedUser } from "../../helpers/authHelper";
 import { styleStatus } from "../../helpers/styleStatus";
+import { fetchRequestCats, deleteRequest } from "../../helpers/serverHelper";
 import CatsCard from "../../components/CatsCard/CatsCard";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-
-const baseURL = process.env.REACT_APP_API_URL;
-const requestCatsURL = `${baseURL}/users`;
 
 class RequestsCats extends Component {
   state = {
@@ -16,23 +13,16 @@ class RequestsCats extends Component {
   };
 
   componentDidMount() {
-    this.fetchRequestCats();
+    this.requestsCats();
   }
 
-  fetchRequestCats = () => {
-    axios
-      .get(`${requestCatsURL}/${getLoggedUser().id}/requests`)
-      .then((response) => {
-        let requestsCats = response.data;
-        this.setState({
-          requestsCats: requestsCats,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("Error trying to fetch the API.");
-      });
+  requestsCats = async () => {
+    const requestsCats = await fetchRequestCats(getLoggedUser().id);
+    this.setState({
+      requestsCats: requestsCats,
+    });
   };
+
   handleDelete = (id, index) => {
     const MySwal = withReactContent(Swal);
     MySwal.fire({
@@ -53,20 +43,9 @@ class RequestsCats extends Component {
       cancelButtonText: "No, I'm not sure",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .delete(`${baseURL}/requests/${id}/delete`)
-          .then(() => {
-            this.fetchRequestCats();
-          })
-          .catch((error) => {
-            console.log(error);
-            alert("Error trying to fetch the API.");
-          });
+        deleteRequest(id, () => this.requestsCats());
       }
     });
-  };
-  handleBack = () => {
-    this.props.history.goBack();
   };
 
   render() {

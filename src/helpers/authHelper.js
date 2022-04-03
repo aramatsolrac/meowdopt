@@ -19,7 +19,6 @@ export function login(userName, password, onSuccess) {
     .then((response) => {
       // TODO: add expiration
       // TODO: encrypt data
-      console.log(response.data);
       sessionStorage.setItem("userLoggedIn", response.data.user);
       onSuccess();
       MySwal.fire({
@@ -35,7 +34,6 @@ export function login(userName, password, onSuccess) {
       });
     })
     .catch((error) => {
-      console.log(error.response);
       MySwal.fire({
         position: "center",
         icon: "error",

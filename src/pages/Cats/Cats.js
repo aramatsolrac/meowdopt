@@ -24,6 +24,7 @@ class Cats extends Component {
     });
   }
 
+  // function to check if the user has scrolled down or not
   checkScrollTop = () => {
     if (!this.state.showScroll && window.pageYOffset > 400) {
       this.setState({ showScroll: true });
@@ -66,7 +67,6 @@ class Cats extends Component {
     const adult = event.target.adult.checked;
     const senior = event.target.senior.checked;
     const city = event.target.city.value;
-    console.log(event.target.inputValue);
 
     let filteredCats = this.state.cats;
     let selectedAges = [];
@@ -112,7 +112,6 @@ class Cats extends Component {
 
   render() {
     document.title = "Home | meowadopt";
-    console.log("Cats");
     window.addEventListener("scroll", this.checkScrollTop);
 
     return (

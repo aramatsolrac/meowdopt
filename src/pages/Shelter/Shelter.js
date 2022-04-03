@@ -1,5 +1,4 @@
 import "./Shelter.scss";
-import axios from "axios";
 import { Component } from "react";
 import CatsCard from "./../../components/CatsCard/CatsCard";
 import { ArrowBackIcon } from "@chakra-ui/icons";
@@ -9,9 +8,10 @@ import {
   faLocationDot,
   faPaw,
 } from "@fortawesome/free-solid-svg-icons";
-
-const baseURL = process.env.REACT_APP_API_URL;
-const sheltersURL = `${baseURL}/shelters`;
+import {
+  fetchSelectedShelter,
+  fetchShelterCats,
+} from "../../helpers/serverHelper";
 
 class Shelter extends Component {
   state = {
@@ -19,57 +19,27 @@ class Shelter extends Component {
     selectedShelter: null,
   };
 
-  componentDidMount() {
-    this.fetchShelterCats();
-    this.fetchSelectedShelter();
+  async componentDidMount() {
+    const shelterCats = await fetchShelterCats(this.props.match.params.id);
+    const selectedShelter = await fetchSelectedShelter(
+      this.props.match.params.id
+    );
+
+    this.setState({
+      shelterCats: shelterCats,
+      selectedShelter: selectedShelter,
+    });
   }
 
-  fetchShelterCats = () => {
-    axios
-      .get(`${sheltersURL}/${this.props.match.params.id}/cats`)
-      .then((response) => {
-        let shelterCats = response.data;
-        console.log({ shelterCats });
-        this.setState({
-          shelterCats: shelterCats,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("Error trying to fetch the API.");
-      });
-  };
-
-  fetchSelectedShelter = () => {
-    axios
-      .get(`${sheltersURL}/${this.props.match.params.id}`)
-      .then((response) => {
-        let selectedShelter = response.data;
-        console.log({ selectedShelter });
-        this.setState({
-          selectedShelter: selectedShelter,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("Error trying to fetch the API.");
-      });
-  };
-
-  handleBack = () => {
-    this.props.history.goBack();
-  };
-
   render() {
-    console.log("Shelter");
-
     document.title = `${
       this.state.selectedShelter && this.state.selectedShelter.name
     } | meowadopt`;
+
     return (
       <div className="shelter" style={{ minHeight: window.screen.height + 10 }}>
         <ArrowBackIcon
-          onClick={this.handleBack}
+          onClick={this.props.history.goBack}
           w={30}
           h={30}
           color={"#dea48f"}

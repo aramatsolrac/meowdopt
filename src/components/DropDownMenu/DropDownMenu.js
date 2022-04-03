@@ -14,7 +14,7 @@ class DropDownMenu extends Component {
     dropdownVisible: false,
   };
 
-  toggleDropdown = (e) => {
+  toggleDropdown = (event) => {
     if (!this.state.dropdownVisible) {
       document.addEventListener("click", this.handleOutsideClick, false);
     } else {
@@ -25,26 +25,29 @@ class DropDownMenu extends Component {
     }));
   };
 
-  handleOutsideClick = (e) => {
-    if (!this.node.contains(e.target)) this.toggleDropdown();
+  handleOutsideClick = (event) => {
+    if (!this.node.contains(event.target)) this.toggleDropdown();
   };
 
   renderDropDownMenu = () => {
+    const signInSignUp = !isLoggedIn()
+      ? "Sign In / Sign Up"
+      : getLoggedUser().name;
+
+    const logoutDisplay = !isLoggedIn() ? "none" : "flex";
+    const handleLinkTo = !isLoggedIn() ? `/login` : `/profile`;
+
     return (
       <form onSubmit={this.props.filterCats}>
         <div className="dropdown__box">
           <div className="dropdown__link">
-            <Link
-              // to={`/profile`}
-              to={!isLoggedIn() ? `/login` : `/profile`}
-              className="dropdown__link-profile"
-            >
+            <Link to={handleLinkTo} className="dropdown__link-profile">
               <FontAwesomeIcon
                 icon={faUser}
                 className="dropdown__icon"
                 size="lg"
               />
-              {!isLoggedIn() ? "User" : getLoggedUser().name} Profile
+              {signInSignUp}
             </Link>
           </div>
           <div className="dropdown__link">
@@ -52,6 +55,7 @@ class DropDownMenu extends Component {
               to={"/"}
               onClick={() => logout()}
               className="dropdown__link-logout"
+              style={{ display: logoutDisplay }}
             >
               <FontAwesomeIcon
                 icon={faArrowRightFromBracket}
@@ -67,7 +71,6 @@ class DropDownMenu extends Component {
   };
 
   render() {
-    console.log("DropMenu");
     return (
       <div
         className="dropdown__container"
