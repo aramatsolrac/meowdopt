@@ -30,7 +30,7 @@ class RequestsCats extends Component {
         <p>
           Are you sure you want to cancel the adoption request of{" "}
           <span className="alert__name">{`${
-            this.state.requestsCats[`${index}`].catName
+            this.state.requestsCats[`${index}`].cat_name
           }`}</span>
           ?
         </p>
@@ -44,6 +44,13 @@ class RequestsCats extends Component {
     }).then((result) => {
       if (result.isConfirmed) {
         deleteRequest(id, () => this.requestsCats());
+        MySwal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your request has been canceled.",
+          confirmButtonColor: "#dea48f",
+          timer: 3000,
+        });
       }
     });
   };
