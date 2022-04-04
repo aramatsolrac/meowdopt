@@ -1,9 +1,14 @@
 import "./Search.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faXmark } from "@fortawesome/free-solid-svg-icons";
 import DropdownFilter from "../DropDownFilter/DropDownFilter";
 
-const Search = ({ searchCats, filterCats, handleClear }) => {
+const Search = ({
+  searchCats,
+  filterCats,
+  handleClearFilter,
+  handleClearSearch,
+}) => {
   return (
     <div className="search">
       <div className="search__container">
@@ -17,7 +22,15 @@ const Search = ({ searchCats, filterCats, handleClear }) => {
           placeholder="Search"
           onChange={searchCats}
         ></input>
-        <DropdownFilter filterCats={filterCats} handleClear={handleClear} />
+        <FontAwesomeIcon
+          icon={faXmark}
+          className="search__icon-xmark"
+          onClick={handleClearSearch}
+        />
+        <DropdownFilter
+          filterCats={filterCats}
+          handleClearFilter={handleClearFilter}
+        />
       </div>
     </div>
   );
