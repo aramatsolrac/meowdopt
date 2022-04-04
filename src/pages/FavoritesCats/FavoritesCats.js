@@ -11,6 +11,7 @@ class FavoritesCats extends Component {
 
   async componentDidMount() {
     const favoritesCats = await fetchFavoriteCats(getLoggedUser().id);
+    console.log({ favoritesCats });
     this.setState({
       favoritesCats: favoritesCats,
     });
@@ -18,8 +19,8 @@ class FavoritesCats extends Component {
 
   render() {
     document.title = `${
-      this.state.favoritesCats[0] && this.state.favoritesCats[0].userName
-    } Favorites Cats | meowadopt`;
+      this.state.favoritesCats[0] && this.state.favoritesCats[0].user_name
+    } Profile | meowadopt`;
 
     return (
       <div className="favoritesCats">
@@ -27,9 +28,9 @@ class FavoritesCats extends Component {
           return (
             <CatsCard
               key={index}
-              id={item.catID}
+              id={item.cat_id}
               image={item.image}
-              catName={item.catName}
+              catName={item.cat_name}
               urlPath={"/cats"}
             />
           );
