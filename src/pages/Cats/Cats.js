@@ -56,6 +56,14 @@ class Cats extends Component {
     });
   };
 
+  // function to clean search cats
+  handleClearSearch = () => {
+    document.getElementById("search").value = "";
+    this.setState({
+      searchedCats: this.state.cats,
+    });
+  };
+
   // function to filter cats
   filterCats = (event) => {
     event.preventDefault();
@@ -104,7 +112,7 @@ class Cats extends Component {
   };
 
   // function to clear filter
-  handleClear = (event) => {
+  handleClearFilter = (event) => {
     fetchCats();
     const form = event.target.parentNode.parentNode.parentNode;
     form.reset();
@@ -119,7 +127,8 @@ class Cats extends Component {
         <Search
           searchCats={this.searchCats}
           filterCats={this.filterCats}
-          handleClear={this.handleClear}
+          handleClearFilter={this.handleClearFilter}
+          handleClearSearch={this.handleClearSearch}
         />
         <div className="cats__container">
           {this.state.searchedCats.map((item, index) => {
