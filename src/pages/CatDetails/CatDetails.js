@@ -27,6 +27,7 @@ class CatDetails extends Component {
 
   async componentDidMount() {
     const selectedCat = await fetchSelectedCat(this.props.match.params.id);
+    console.log({ selectedCat });
 
     this.setState({
       selectedCat: selectedCat,
@@ -42,13 +43,14 @@ class CatDetails extends Component {
 
     const favoritesCats = await fetchFavoriteCats(getLoggedUser().id);
     const requestsCats = await fetchRequestCats(getLoggedUser().id);
+    console.log("user", getLoggedUser());
 
     const foundFavCat = favoritesCats.find(
-      (cat) => cat.catID === this.state.selectedCat.id
+      (cat) => cat.cat_id === this.state.selectedCat.id
     );
 
     const foundRequestCat = requestsCats.find(
-      (cat) => cat.catID === this.state.selectedCat.id
+      (cat) => cat.cat_id === this.state.selectedCat.id
     );
 
     this.setState({
@@ -71,7 +73,7 @@ class CatDetails extends Component {
       title: (
         <p>
           Do you want to send an adoption request to{" "}
-          <span className="alert__name">{this.state.selectedCat.catName}</span>?
+          <span className="alert__name">{this.state.selectedCat.name}</span>?
         </p>
       ),
       html: `<img src='${baseURL}${this.state.selectedCat.image}' alt="cat" />`,
@@ -98,14 +100,14 @@ class CatDetails extends Component {
                   <p>Submitted!</p>
                   <p>
                     <span className="alert__name">
-                      {this.state.selectedCat.shelterName}{" "}
+                      {this.state.selectedCat.shelter_name}{" "}
                     </span>{" "}
                     will contact you soon!
                   </p>
                   <p>
                     {" "}
                     <span className="alert__name">
-                      {this.state.selectedCat.catName}
+                      {this.state.selectedCat.name}
                     </span>{" "}
                     is looking forward to meet you!
                   </p>
@@ -139,7 +141,7 @@ class CatDetails extends Component {
         this.updateLikeAndRequest()
       );
     } else {
-      removeLikeCat(this.state.selectedCat.id, () =>
+      removeLikeCat(this.state.selectedCat.id, getLoggedUser().id, () =>
         this.updateLikeAndRequest()
       );
     }
@@ -147,7 +149,7 @@ class CatDetails extends Component {
 
   render() {
     document.title = `${
-      this.state.selectedCat && this.state.selectedCat.catName
+      this.state.selectedCat && this.state.selectedCat.name
     } | meowadopt`;
     const isCatRequestedClass = !this.state.isCatRequested
       ? `catDetails__adopt`
@@ -180,7 +182,7 @@ class CatDetails extends Component {
               key={this.state.selectedCat.id}
               id={this.state.selectedCat.id}
               image={this.state.selectedCat.image}
-              catName={this.state.selectedCat.catName}
+              catName={this.state.selectedCat.name}
             />
             <div className="catDetails__container">
               <div className="catDetails__info">
@@ -189,10 +191,10 @@ class CatDetails extends Component {
               </div>
               <div className="catDetails__shelter">
                 <Link
-                  to={`/shelters/${this.state.selectedCat.shelterID}`}
+                  to={`/shelters/${this.state.selectedCat.shelter_id}`}
                   className="catDetails__shelter-link"
                 >
-                  {this.state.selectedCat.shelterName}
+                  {this.state.selectedCat.shelter_name}
                   <FontAwesomeIcon
                     icon={faAngleRight}
                     size="lg"
