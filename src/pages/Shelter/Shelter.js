@@ -95,7 +95,7 @@ class Shelter extends Component {
                   key={index}
                   id={item.id}
                   image={item.image}
-                  catName={item.catName}
+                  catName={item.name}
                   urlPath={"/cats"}
                 />
               );
