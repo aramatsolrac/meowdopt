@@ -59,6 +59,7 @@ export const fetchRequestCats = (userID) => {
 };
 
 export const likeCat = (catID, userID, handleSuccess) => {
+  console.log("likeCat");
   const data = {
     catID: catID,
     userID: userID,
@@ -72,9 +73,16 @@ export const likeCat = (catID, userID, handleSuccess) => {
     });
 };
 
-export const removeLikeCat = (catID, handleSuccess) => {
+export const removeLikeCat = (catID, userID, handleSuccess) => {
+  const data = {
+    data: {
+      catID: catID,
+      userID: userID,
+    },
+  };
+
   axios
-    .delete(`${catsURL}/${catID}/remove-like`)
+    .delete(`${catsURL}/${catID}/remove-like`, data)
     .then(() => handleSuccess())
     .catch((error) => {
       handleErrorMessage(error);
@@ -82,6 +90,7 @@ export const removeLikeCat = (catID, handleSuccess) => {
 };
 
 export const catRequest = (catID, user, status, handleSuccess) => {
+  console.log("Running catRequest");
   const data = {
     catID: catID,
     userID: user.id,
