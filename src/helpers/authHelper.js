@@ -17,8 +17,6 @@ export function login(userName, password, onSuccess) {
   axios
     .post(loginURL, data)
     .then((response) => {
-      // TODO: add expiration
-      // TODO: encrypt data
       sessionStorage.setItem("userLoggedIn", response.data.user);
       onSuccess();
       MySwal.fire({
