@@ -125,7 +125,7 @@ class DropdownFilter extends Component {
             />
             <Button
               children={"Clear"}
-              onClick={this.props.handleClear}
+              onClick={this.props.handleClearFilter}
               className="dropdown__buttons-clear"
             />
           </div>
