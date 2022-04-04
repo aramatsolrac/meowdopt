@@ -6,7 +6,7 @@
 
 .login {
   &__wrapper {
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    box-shadow: $box-shadow;
     border-radius: 0.3rem;
     margin: 1rem;
 
@@ -14,7 +14,7 @@
       @include wrap($max-width, $margin-center);
       margin-top: 2rem;
       width: 35rem;
-      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      box-shadow: $box-shadow;
       border-radius: 0.3rem;
     }
   }

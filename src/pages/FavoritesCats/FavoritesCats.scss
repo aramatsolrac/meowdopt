@@ -1,9 +1,9 @@
 @import "./../../styles/partials/global";
 
 .favoritesCats {
-  display: flex;
+  @include flex-default(center, center);
   flex-wrap: wrap;
-  justify-content: center;
+
   @include desktop {
     justify-content: flex-start;
     margin-left: 1rem;

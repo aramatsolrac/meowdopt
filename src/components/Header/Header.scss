@@ -1,8 +1,7 @@
 @import "./../../styles/partials/global";
 
 .header {
-  display: flex;
-  flex-direction: column;
+  @include flex-direction(column);
   padding: 1rem;
   width: 100%;
   background-color: $color-light;
@@ -11,19 +10,14 @@
   }
   &__wrapper {
     @include full-width($color-light);
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    box-shadow: $box-shadow;
   }
   &__container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex-default(center, space-between);
   }
   &__logo {
     color: $color-dark;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+    @include flex(row, center, space-around);
   }
   &__menu {
     color: $color-secondary;

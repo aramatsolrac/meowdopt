@@ -5,8 +5,7 @@
     @include wrap($max-width, $margin-center);
   }
   &__container {
-    display: flex;
-    flex-direction: column;
+    @include flex-direction(column);
     margin: 1rem;
     color: $color-secondary;
   }
@@ -14,10 +13,7 @@
     font-weight: bold;
   }
   &__content {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
+    @include flex(row, center, flex-start);
     @include tablet {
       margin-left: 0.6rem;
     }
@@ -41,15 +37,10 @@
     }
   }
   &__cats {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    @include flex-default(center, center);
     @include tablet {
       justify-content: flex-start;
       margin-left: 1rem;
     }
-    // @include desktop {
-    //   margin: 2rem 0 0 2rem;
-    // }
   }
 }

@@ -1,9 +1,7 @@
 @import "./../../styles/partials/global";
 .footer {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-default(center, center);
   padding: 1.5rem;
   &__text {
     font-weight: 400;

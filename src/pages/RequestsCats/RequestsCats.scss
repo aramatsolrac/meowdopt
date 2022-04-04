@@ -15,7 +15,7 @@
     min-width: 17rem;
     max-width: 17rem;
     border-radius: 0.5rem;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    box-shadow: $box-shadow;
   }
 
   &__buttons {
@@ -30,23 +30,22 @@
     justify-content: space-between;
   }
   &__status.received {
-    @include status(check, #84a59d);
+    @include status(check, $color-check);
   }
   &__status.inReview {
-    @include status(progress, #8ecae6);
+    @include status(progress, $color-progress);
   }
   &__status.approved {
-    @include status(paw, #88cab5);
+    @include status(paw, $color-paw);
   }
   &__status.declined {
-    @include status(declined, #f07167);
+    @include status(declined, $color-declined);
   }
   &__cancel {
     color: $color-secondary;
     font-weight: bold;
     &:hover {
       text-decoration: underline;
-      //   color: $color-light-dark;
     }
   }
 }

@@ -5,9 +5,8 @@
     @include wrap($max-width, $margin-center);
   }
   &__container {
-    display: flex;
+    @include flex-default(center, center);
     flex-wrap: wrap;
-    justify-content: center;
     margin-bottom: 4rem;
     @include desktop {
       justify-content: flex-start;
@@ -18,17 +17,14 @@
 
 .scrollTop {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+  @include flex-default(center, center);
   @include desktop {
     @include wrap($max-width, $margin-center);
   }
 
   &__icon {
     position: fixed;
-    background-color: white;
+    background-color: $color-light;
     bottom: 50px;
     border-radius: 50%;
     z-index: 1000;

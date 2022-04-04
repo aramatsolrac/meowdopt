@@ -5,11 +5,9 @@
 }
 
 .signUp {
-  display: flex;
-  flex-direction: column;
+  @include flex-direction(column);
   &__content {
-    display: flex;
-    flex-direction: column;
+    @include flex-direction(column);
   }
   &__label {
     color: $color-secondary-darker;
