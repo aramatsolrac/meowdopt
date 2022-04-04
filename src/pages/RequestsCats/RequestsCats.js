@@ -49,10 +49,6 @@ class RequestsCats extends Component {
   };
 
   render() {
-    document.title = `${
-      this.state.requestsCats[0] && this.state.requestsCats[0].name
-    } Requests | meowadopt`;
-
     return (
       <div className="request">
         {this.state.requestsCats.map((item, index) => {
@@ -60,9 +56,9 @@ class RequestsCats extends Component {
             <div key={index} className="request__container">
               <CatsCard
                 key={index}
-                id={item.catID}
+                id={item.cat_id}
                 image={item.image}
-                catName={item.catName}
+                catName={item.cat_name}
                 urlPath={"/cats"}
               />
               <div className="request__buttons">
