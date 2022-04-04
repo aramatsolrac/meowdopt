@@ -18,6 +18,7 @@ class Cats extends Component {
 
   async componentDidMount() {
     const cats = await fetchCats();
+    console.log({ cats });
     this.setState({
       cats: cats,
       searchedCats: cats,
@@ -42,8 +43,7 @@ class Cats extends Component {
     const searchInput = event.target.value.toLowerCase();
     const searchedCats = this.state.cats.filter((cat) => {
       return (
-        cat.catName.toLowerCase().includes(searchInput) ||
-        cat.shelterName.toLowerCase().includes(searchInput) ||
+        cat.name.toLowerCase().includes(searchInput) ||
         cat.age.toLowerCase().includes(searchInput) ||
         cat.gender.toLowerCase().includes(searchInput) ||
         cat.description.toLowerCase().includes(searchInput) ||
@@ -128,7 +128,7 @@ class Cats extends Component {
                 key={index}
                 id={item.id}
                 image={item.image}
-                catName={item.catName}
+                catName={item.name}
                 urlPath={"cats"}
               />
             );
