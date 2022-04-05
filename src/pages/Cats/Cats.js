@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUp } from "@fortawesome/free-solid-svg-icons";
 import CatsCard from "../../components/CatsCard/CatsCard";
 import Search from "../../components/Search/Search";
+import NotFound from "../../components/NotFound/NotFound";
 
 class Cats extends Component {
   state = {
@@ -118,6 +119,16 @@ class Cats extends Component {
     form.reset();
   };
 
+  renderNotFound() {
+    if (
+      this.state.cats.length > 0 &&
+      this.state.filteredCats.length === 0 &&
+      this.state.searchedCats.length === 0
+    ) {
+      return <NotFound />;
+    }
+  }
+
   render() {
     document.title = "Home | meowadopt";
     window.addEventListener("scroll", this.checkScrollTop);
@@ -130,6 +141,7 @@ class Cats extends Component {
           handleClearFilter={this.handleClearFilter}
           handleClearSearch={this.handleClearSearch}
         />
+        {this.renderNotFound()}
         <div className="cats__container">
           {this.state.searchedCats.map((item, index) => {
             return (
