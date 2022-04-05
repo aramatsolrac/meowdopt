@@ -1,0 +1,19 @@
+@import "./../../styles/partials/global";
+
+.notFound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-light-dark;
+    height: 22rem;
+    min-width: 17rem;
+    max-width: 17rem;
+    border-radius: 0.5rem;
+    padding: 0 0.7rem;
+    box-shadow: $box-shadow;
+  }
+}
