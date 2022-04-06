@@ -4,6 +4,15 @@
   @include desktop {
     @include wrap($max-width, $margin-center);
   }
+  &__cats {
+    @include flex(row, center, center);
+    flex-wrap: wrap;
+    @include tablet {
+      justify-content: flex-start;
+      margin-left: 1rem;
+    }
+  }
+
   &__container {
     @include flex-direction(column);
     margin: 1rem;
@@ -34,13 +43,6 @@
     }
     &:hover {
       color: $color-secondary-dark;
-    }
-  }
-  &__cats {
-    @include flex-default(center, center);
-    @include tablet {
-      justify-content: flex-start;
-      margin-left: 1rem;
     }
   }
 }
