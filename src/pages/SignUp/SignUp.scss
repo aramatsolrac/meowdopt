@@ -44,9 +44,6 @@
     background-color: inherit;
     color: $color-secondary;
     cursor: pointer;
-    &:hover {
-      background-color: $color-light-dark;
-    }
   }
   &__button {
     @include button(

@@ -38,9 +38,6 @@
     background-color: inherit;
     color: $color-secondary;
     cursor: pointer;
-    &:hover {
-      opacity: 0.8;
-    }
   }
   &__button {
     @include button(
