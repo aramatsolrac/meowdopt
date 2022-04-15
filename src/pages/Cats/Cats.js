@@ -19,7 +19,6 @@ class Cats extends Component {
 
   async componentDidMount() {
     const cats = await fetchCats();
-    console.log({ cats });
     this.setState({
       cats: cats,
       searchedCats: cats,

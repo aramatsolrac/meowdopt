@@ -59,7 +59,6 @@ export const fetchRequestCats = (userID) => {
 };
 
 export const likeCat = (catID, userID, handleSuccess) => {
-  console.log("likeCat");
   const data = {
     catID: catID,
     userID: userID,
@@ -90,7 +89,6 @@ export const removeLikeCat = (catID, userID, handleSuccess) => {
 };
 
 export const catRequest = (catID, user, status, handleSuccess) => {
-  console.log("Running catRequest");
   const data = {
     catID: catID,
     userID: user.id,

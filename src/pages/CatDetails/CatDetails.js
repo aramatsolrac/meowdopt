@@ -27,7 +27,6 @@ class CatDetails extends Component {
 
   async componentDidMount() {
     const selectedCat = await fetchSelectedCat(this.props.match.params.id);
-    console.log({ selectedCat });
 
     this.setState({
       selectedCat: selectedCat,
@@ -43,7 +42,6 @@ class CatDetails extends Component {
 
     const favoritesCats = await fetchFavoriteCats(getLoggedUser().id);
     const requestsCats = await fetchRequestCats(getLoggedUser().id);
-    console.log("user", getLoggedUser());
 
     const foundFavCat = favoritesCats.find(
       (cat) => cat.cat_id === this.state.selectedCat.id

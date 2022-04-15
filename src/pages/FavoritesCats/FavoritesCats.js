@@ -11,7 +11,6 @@ class FavoritesCats extends Component {
 
   async componentDidMount() {
     const favoritesCats = await fetchFavoriteCats(getLoggedUser().id);
-    console.log({ favoritesCats });
     this.setState({
       favoritesCats: favoritesCats,
     });
