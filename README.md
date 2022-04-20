@@ -54,6 +54,7 @@ Many shelters have their own website, making it harder for users to find their s
 ### Live
 
 - <a href="https://meowdopt.herokuapp.com/" target="\_blank">meowdopt</a>
+   - _Note: If it does not open at the first try, give it a minute because free heroku dyno could be sleeping._  
 
 ### Author
 
