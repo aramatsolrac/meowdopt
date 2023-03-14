@@ -49,7 +49,7 @@ Many shelters have their own website, making it harder for users to find their s
 - Download this Repository or clone it: `git clone git@github.com:aramatsolrac/meowdopt.git`
 - `cd` into the new folder and type `npm install`
 - To run the React project type: `npm start`
-- _Note_: This application requires the backend running at the same time: [meowdopt API](https://github.com/aramatsolrac/meowdopt-API)
+- _Note_: This application requires the backend running at the same time: [meowdopt API](https://api-meowdopt.herokuapp.com/)
 
 ### Live
 
